@@ -1,4 +1,7 @@
 {
-  "ok": false,
-  "error": "<HTTPError 401: 'Unauthorized'>"
+  "ok": true,
+  "route_identifiers": 807,
+  "matched_rows": 482,
+  "chosen_tracks": 326,
+  "geometry_features": 715
 }
