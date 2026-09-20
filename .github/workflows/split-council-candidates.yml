@@ -1,0 +1,42 @@
+name: Split Council candidate bundles
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  split:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Split candidate report and geometry
+        run: |
+          python - <<'PY'
+          import json,pathlib,shutil
+          root=pathlib.Path('source-data/auckland-council/TrackTrailCycleway')
+          out=root/'candidate-chunks'
+          if out.exists(): shutil.rmtree(out)
+          out.mkdir()
+          rep=json.loads((root/'sheet-council-candidates.json').read_text(encoding='utf-8'))
+          matches=rep['matches']
+          for i in range(0,len(matches),40):
+              chunk=matches[i:i+40]
+              (out/f'matches-{i//40+1:02d}.json').write_text(json.dumps(chunk,ensure_ascii=False,indent=2),encoding='utf-8')
+          geo=json.loads((root/'sheet-council-candidate-geometry.geojson').read_text(encoding='utf-8'))
+          fs=geo['features']
+          for i in range(0,len(fs),60):
+              chunk={'type':'FeatureCollection','features':fs[i:i+60]}
+              (out/f'geometry-{i//60+1:02d}.geojson').write_text(json.dumps(chunk,ensure_ascii=False),encoding='utf-8')
+          manifest={'match_chunks':(len(matches)+39)//40,'geometry_chunks':(len(fs)+59)//60,'matches':len(matches),'features':len(fs)}
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+          print(manifest)
+          PY
+      - name: Commit chunks and remove workflow
+        run: |
+          rm .github/workflows/split-council-candidates.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Split Council candidate bundles for audit' || exit 0
+          git push
