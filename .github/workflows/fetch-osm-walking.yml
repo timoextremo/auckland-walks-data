@@ -22,8 +22,9 @@ jobs:
           out tags geom;
           EOF
           curl -fL --retry 4 --retry-delay 10 \
-            --data-urlencode 'data@query.overpass' \
-            'https://overpass-api.de/api/interpreter' \
+            -A 'auckland-walks-data route audit' \
+            --data-urlencode data@query.overpass \
+            'https://overpass.kumi.systems/api/interpreter' \
             -o osm-walking.json
           test -s osm-walking.json
       - name: Add provenance
