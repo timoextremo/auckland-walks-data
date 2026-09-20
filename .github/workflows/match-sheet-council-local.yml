@@ -1,0 +1,68 @@
+name: Match route identifiers to Council tracks
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  match:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Match identifiers and build compact geometry bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,gzip,json,pathlib,re,difflib,unicodedata
+          root=pathlib.Path('source-data/auckland-council/TrackTrailCycleway')
+          raw=base64.b64decode(pathlib.Path('analysis/sheet-route-identifiers.json.gz.b64').read_text().strip())
+          rows=json.loads(gzip.decompress(raw).decode('utf-8'))
+          idx=json.loads((root/'named-track-index.json').read_text(encoding='utf-8'))['tracks']
+          def norm(s):
+              s=unicodedata.normalize('NFKD',s or '').encode('ascii','ignore').decode().casefold()
+              s=re.sub(r'\b(the|track|walk|walkway|path|trail|loop|reserve|regional|park)\b',' ',s)
+              s=re.sub(r'[^a-z0-9]+',' ',s)
+              return ' '.join(s.split())
+          def score(a,b):
+              na,nb=norm(a),norm(b)
+              if not na or not nb:return 0
+              seq=difflib.SequenceMatcher(None,na,nb).ratio()*100
+              sa,sb=set(na.split()),set(nb.split())
+              jac=(len(sa&sb)/len(sa|sb)*100) if sa|sb else 0
+              contain=100 if (na in nb or nb in na) and min(len(na),len(nb))>=5 else 0
+              # favour matching distinctive first tokens / proper names
+              first=100 if na.split() and nb.split() and na.split()[0]==nb.split()[0] else 0
+              return round(max(seq,jac,contain,first*0.85),1)
+          report=[]; chosen={}
+          for r in rows:
+              name=r['name']; cand=[]
+              for t in idx:
+                  sc=score(name,t['trackname'])
+                  if sc>=68: cand.append((sc,t))
+              cand=sorted(cand,key=lambda x:(-x[0],x[1]['trackname']))[:5]
+              if cand:
+                  rec={'row':r['row'],'sheet_name':name,'location':r.get('location',''),'candidates':[{'score':s,**t} for s,t in cand]}
+                  report.append(rec)
+                  for s,t in cand:
+                      if s>=75: chosen[t['trackname']]=t
+          features=[]
+          for name,t in sorted(chosen.items()):
+              fc=json.loads((root/t['file']).read_text(encoding='utf-8'))
+              for f in fc.get('features',[]):
+                  f=dict(f); p=dict(f.get('properties') or {}); p['_COUNCIL_TRACKNAME']=name; f['properties']=p; features.append(f)
+          (root/'sheet-council-candidates.json').write_text(json.dumps({'matched_rows':len(report),'chosen_tracks':len(chosen),'matches':report},ensure_ascii=False,indent=2),encoding='utf-8')
+          (root/'sheet-council-candidate-geometry.geojson').write_text(json.dumps({'type':'FeatureCollection','features':features},ensure_ascii=False),encoding='utf-8')
+          (root/'sheet-match-status.json').write_text(json.dumps({'ok':True,'route_identifiers':len(rows),'matched_rows':len(report),'chosen_tracks':len(chosen),'geometry_features':len(features)},indent=2),encoding='utf-8')
+          print(json.dumps({'route_identifiers':len(rows),'matched_rows':len(report),'chosen_tracks':len(chosen),'geometry_features':len(features)}))
+          PY
+      - name: Commit results and remove temporary inputs
+        run: |
+          rm .github/workflows/match-sheet-council-local.yml
+          rm analysis/sheet-route-identifiers.json.gz.b64
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Build sheet to Council route candidate geometry' || exit 0
+          git push
