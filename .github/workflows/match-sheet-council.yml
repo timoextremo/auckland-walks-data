@@ -1,0 +1,80 @@
+name: Match sheet to Council routes
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  match:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch sheet and build candidate bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, io, json, pathlib, re, urllib.request, difflib, unicodedata
+          root=pathlib.Path('source-data/auckland-council/TrackTrailCycleway')
+          url='https://docs.google.com/spreadsheets/d/1q8VvxSB1kwEGCmulTqmnwbde1TA2xEJx4WP72J7uymk/export?format=csv&gid=968854724'
+          req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+          try:
+              with urllib.request.urlopen(req,timeout=45) as r:
+                  raw=r.read()
+              text=raw.decode('utf-8-sig')
+          except Exception as e:
+              (root/'sheet-match-status.json').write_text(json.dumps({'ok':False,'error':repr(e)},indent=2),encoding='utf-8')
+              raise SystemExit(0)
+          rows=list(csv.DictReader(io.StringIO(text)))
+          if not rows or 'Walks' not in rows[0]:
+              (root/'sheet-match-status.json').write_text(json.dumps({'ok':False,'error':'unexpected CSV','bytes':len(raw)},indent=2),encoding='utf-8')
+              raise SystemExit(0)
+          idx=json.loads((root/'named-track-index.json').read_text(encoding='utf-8'))['tracks']
+          def norm(s):
+              s=unicodedata.normalize('NFKD',s or '').encode('ascii','ignore').decode().casefold()
+              s=re.sub(r'\b(the|track|walk|walkway|path|trail|loop|reserve|regional|park)\b',' ',s)
+              s=re.sub(r'[^a-z0-9]+',' ',s)
+              return ' '.join(s.split())
+          def score(a,b):
+              na,nb=norm(a),norm(b)
+              if not na or not nb:return 0
+              seq=difflib.SequenceMatcher(None,na,nb).ratio()*100
+              sa,sb=set(na.split()),set(nb.split())
+              jac=(len(sa&sb)/len(sa|sb)*100) if sa|sb else 0
+              contain=100 if (na in nb or nb in na) and min(len(na),len(nb))>=5 else 0
+              return round(max(seq,jac,contain),1)
+          report=[]; chosen=set()
+          for i,r in enumerate(rows[:809],start=2):
+              name=(r.get('Walks') or '').strip(); loc=(r.get('Location') or '').strip()
+              if not name: continue
+              cand=[]
+              for t in idx:
+                  sc=score(name,t['trackname'])
+                  if sc>=68:
+                      cand.append((sc,t))
+              cand=sorted(cand,key=lambda x:(-x[0],x[1]['trackname']))[:5]
+              if cand:
+                  report.append({'row':i,'sheet_name':name,'location':loc,'candidates':[{'score':s,**t} for s,t in cand]})
+                  for s,t in cand:
+                      if s>=75: chosen.add(t['trackname'])
+          features=[]
+          file_by={t['trackname']:t['file'] for t in idx}
+          for name in sorted(chosen):
+              p=root/file_by[name]
+              fc=json.loads(p.read_text(encoding='utf-8'))
+              for f in fc.get('features',[]):
+                  f=dict(f); props=dict(f.get('properties') or {}); props['_COUNCIL_TRACKNAME']=name; f['properties']=props; features.append(f)
+          (root/'sheet-council-candidates.json').write_text(json.dumps({'ok':True,'sheet_rows':len(rows),'matched_rows':len(report),'chosen_tracks':len(chosen),'matches':report},ensure_ascii=False,indent=2),encoding='utf-8')
+          (root/'sheet-council-candidate-geometry.geojson').write_text(json.dumps({'type':'FeatureCollection','features':features},ensure_ascii=False),encoding='utf-8')
+          (root/'sheet-match-status.json').write_text(json.dumps({'ok':True,'sheet_rows':len(rows),'matched_rows':len(report),'chosen_tracks':len(chosen),'geometry_features':len(features)},indent=2),encoding='utf-8')
+          print(json.dumps({'sheet_rows':len(rows),'matched_rows':len(report),'chosen_tracks':len(chosen),'geometry_features':len(features)}))
+          PY
+      - name: Commit results and remove workflow
+        run: |
+          rm .github/workflows/match-sheet-council.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Match Auckland Walks sheet to Council track geometry' || exit 0
+          git push
