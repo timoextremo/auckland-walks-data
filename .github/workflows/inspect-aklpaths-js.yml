@@ -1,0 +1,47 @@
+name: Inspect AKL Paths GIS JS
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-aklpaths-js.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect JS GIS calls
+        run: |
+          python - <<'PY'
+          import requests,re,json
+          from pathlib import Path
+          base='https://www.aucklandcouncil.govt.nz'
+          page=requests.get(base+'/en/parks-recreation/get-outdoors/aklpaths/path-detail/305.html',headers={'User-Agent':'Mozilla/5.0'},timeout=30).text
+          scripts=re.findall(r'<script[^>]+src=["\']([^"\']+)',page,re.I)
+          out=[]
+          for s in scripts:
+            if not s.startswith('http'): s=base+s
+            txt=requests.get(s,headers={'User-Agent':'Mozilla/5.0'},timeout=30).text
+            interesting=any(k.lower() in txt.lower() for k in ['showgis','arcgis','featureserver','mapserver','pathmap','gis'])
+            if not interesting: continue
+            out.append(f'=== {s} len={len(txt)} ===')
+            urls=sorted(set(re.findall(r'https?://[^"\'` )]+',txt)))
+            for u in urls:
+              if any(k in u.lower() for k in ['arcgis','mapserver','featureserver','gis','api']): out.append('URL '+u[:1500])
+            for kw in ['showGis','FeatureServer','MapServer','arcgis','pathId','itemId','AKLPath','gis']:
+              pos=[m.start() for m in re.finditer(kw,txt,re.I)]
+              out.append(f'{kw} count={len(pos)}')
+              for p in pos[:20]:
+                sn=re.sub(r'\s+',' ',txt[max(0,p-500):p+1400])
+                out.append('  '+sn)
+          Path('source-data').mkdir(exist_ok=True)
+          Path('source-data/aklpaths-js-gis-inspection.txt').write_text('\n'.join(out),encoding='utf-8')
+          PY
+      - name: Commit result and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add source-data/aklpaths-js-gis-inspection.txt
+          git rm .github/workflows/inspect-aklpaths-js.yml
+          git commit -m 'Inspect AKL Paths GIS JavaScript'
+          git push
