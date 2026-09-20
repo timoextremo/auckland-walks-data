@@ -1,0 +1,60 @@
+name: Fetch AucklandPaths webmap
+on:
+  push:
+    paths:
+      - '.github/workflows/fetch-aucklandpaths-webmap.yml'
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch webmap definition and layer metadata
+        run: |
+          python - <<'PY'
+          import requests,json,re
+          from pathlib import Path
+          item='468d9984c89447b5a0cece63684b1eb9'
+          hosts=['https://aucklandcouncil.maps.arcgis.com','https://www.arcgis.com']
+          s=requests.Session(); h={'User-Agent':'Mozilla/5.0'}
+          out=[]; data=None
+          for host in hosts:
+            u=f'{host}/sharing/rest/content/items/{item}/data?f=json'
+            r=s.get(u,headers=h,timeout=30)
+            out.append(f'WEBMAP {u} status={r.status_code} len={len(r.text)}')
+            out.append(r.text[:300000])
+            try:
+              j=r.json()
+              if j and 'error' not in j and j.get('operationalLayers') is not None:
+                data=j; break
+            except: pass
+          services=[]
+          def walk(x,path=''):
+            if isinstance(x,dict):
+              if isinstance(x.get('url'),str): services.append((path,x.get('title') or x.get('id'),x['url']))
+              for k,v in x.items(): walk(v,path+'/'+str(k))
+            elif isinstance(x,list):
+              for i,v in enumerate(x): walk(v,path+f'/{i}')
+          if data: walk(data)
+          out.append('=== SERVICES ===')
+          for p,t,u in services: out.append(json.dumps({'path':p,'title':t,'url':u}))
+          seen=set()
+          for _,title,u in services:
+            if u in seen: continue
+            seen.add(u)
+            q=u+('&' if '?' in u else '?')+'f=json'
+            try:
+              r=s.get(q,headers=h,timeout=30); out.append(f'=== META {title} {u} {r.status_code} len={len(r.text)} ==='); out.append(r.text[:150000])
+            except Exception as e: out.append(f'ERR {u} {e}')
+          Path('source-data').mkdir(exist_ok=True)
+          Path('source-data/aucklandpaths-webmap.txt').write_text('\n'.join(out),encoding='utf-8')
+          PY
+      - name: Commit result and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add source-data/aucklandpaths-webmap.txt
+          git rm .github/workflows/fetch-aucklandpaths-webmap.yml
+          git commit -m 'Fetch AucklandPaths ArcGIS web map definition'
+          git push
