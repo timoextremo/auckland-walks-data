@@ -1,0 +1,67 @@
+name: Inspect AucklandPaths GIS app
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-aucklandpaths-app.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect GIS app
+        run: |
+          python - <<'PY'
+          import requests,re,json,urllib.parse
+          from pathlib import Path
+          base='https://mapspublic.aklc.govt.nz/bizapps/AucklandPaths/'
+          u=base+'index.html?&query=AucklandPaths_3110,ItemID,305'
+          s=requests.Session(); h={'User-Agent':'Mozilla/5.0'}
+          r=s.get(u,headers=h,timeout=30)
+          out=[f'INDEX status={r.status_code} final={r.url} len={len(r.text)}']
+          html=r.text
+          srcs=re.findall(r'<script[^>]+src=["\']([^"\']+)',html,re.I)
+          links=re.findall(r'<link[^>]+href=["\']([^"\']+)',html,re.I)
+          out.append('SCRIPTS='+json.dumps(srcs))
+          alljs=[]
+          for src in srcs:
+            su=urllib.parse.urljoin(r.url,src)
+            try:
+              t=s.get(su,headers=h,timeout=30).text
+            except Exception as e:
+              out.append(f'ERR {su} {e}'); continue
+            alljs.append((su,t))
+            out.append(f'JS {su} len={len(t)}')
+            urls=sorted(set(re.findall(r'https?://[^"\'` )]+',t)))
+            for x in urls:
+              if any(k in x.lower() for k in ['arcgis','mapserver','featureserver','rest/services','aucklandpath','aklc.govt.nz']): out.append(' URL '+x[:2500])
+            for kw in ['AucklandPaths_3110','ItemID','FeatureServer','MapServer','rest/services','queryFeatures','QueryTask','arcgis','serviceUrl','operationalLayers']:
+              pos=[m.start() for m in re.finditer(kw,t,re.I)]
+              if pos:
+                out.append(f' {kw} count={len(pos)}')
+                for p in pos[:15]: out.append('  '+re.sub(r'\s+',' ',t[max(0,p-600):p+1800]))
+          # also inspect common config files referenced literally
+          candidates=set()
+          for su,t in alljs:
+            for m in re.finditer(r'["\']([^"\']+\.(?:json|js|xml))(?:\?[^"\']*)?["\']',t,re.I):
+              q=urllib.parse.urljoin(su,m.group(1));
+              if 'AucklandPaths' in q or '/config' in q.lower(): candidates.add(q)
+          out.append('CANDIDATES='+json.dumps(sorted(candidates)))
+          for q in sorted(candidates)[:50]:
+            try:
+              rr=s.get(q,headers=h,timeout=20); tx=rr.text
+              out.append(f'CFG {q} status={rr.status_code} len={len(tx)}')
+              if any(k.lower() in tx.lower() for k in ['featureserver','mapserver','aucklandpaths_3110','itemid','rest/services']): out.append(tx[:20000])
+            except Exception as e: out.append(f'CFGERR {q} {e}')
+          Path('source-data').mkdir(exist_ok=True)
+          Path('source-data/aucklandpaths-app-inspection.txt').write_text('\n'.join(out),encoding='utf-8')
+          PY
+      - name: Commit result and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add source-data/aucklandpaths-app-inspection.txt
+          git rm .github/workflows/inspect-aucklandpaths-app.yml
+          git commit -m 'Inspect AucklandPaths GIS service configuration'
+          git push
