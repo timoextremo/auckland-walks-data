@@ -1,0 +1,81 @@
+name: Index Auckland Council tracks by name
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/index-auckland-council-tracks.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build named-track index and split GeoJSON
+        run: |
+          python - <<'PY'
+          import json, pathlib, re, hashlib, math
+          src = pathlib.Path('source-data/auckland-council/TrackTrailCycleway/layer-0-TrackTrailCycleway.geojson')
+          root = src.parent
+          named_dir = root / 'named'
+          named_dir.mkdir(exist_ok=True)
+          data = json.loads(src.read_text(encoding='utf-8'))
+
+          def coords_iter(g):
+              if not g: return
+              t=g.get('type'); c=g.get('coordinates')
+              if t=='LineString':
+                  for p in c: yield p
+              elif t=='MultiLineString':
+                  for line in c:
+                      for p in line: yield p
+
+          groups={}
+          unnamed=0
+          for f in data.get('features',[]):
+              p=f.get('properties') or {}
+              name=(p.get('TRACKNAME') or '').strip()
+              if not name:
+                  unnamed += 1
+                  continue
+              groups.setdefault(name,[]).append(f)
+
+          index=[]
+          for name, feats in sorted(groups.items(), key=lambda kv: kv[0].casefold()):
+              xs=[]; ys=[]; statuses=set(); ids=[]; total_len=0.0
+              for f in feats:
+                  p=f.get('properties') or {}
+                  if p.get('STATUS') not in (None,''): statuses.add(str(p.get('STATUS')))
+                  if p.get('OBJECTID') is not None: ids.append(p.get('OBJECTID'))
+                  try:
+                      total_len += float(p.get('Shape__Length') or p.get('SHAPE__Length') or p.get('SHAPE_Length') or 0)
+                  except Exception: pass
+                  for pt in coords_iter(f.get('geometry')):
+                      if len(pt)>=2:
+                          xs.append(float(pt[0])); ys.append(float(pt[1]))
+              bbox=[min(xs),min(ys),max(xs),max(ys)] if xs else None
+              slug=re.sub(r'[^a-z0-9]+','-',name.casefold()).strip('-')[:80] or 'track'
+              h=hashlib.sha1(name.encode('utf-8')).hexdigest()[:8]
+              fn=f'named/{slug}-{h}.geojson'
+              (root/fn).write_text(json.dumps({'type':'FeatureCollection','features':feats},ensure_ascii=False),encoding='utf-8')
+              index.append({
+                  'trackname':name,'feature_count':len(feats),'objectids':ids,
+                  'statuses':sorted(statuses),'bbox_wgs84':bbox,
+                  'shape_length_sum_m':round(total_len,2),'file':fn
+              })
+
+          payload={'source_file':src.name,'unique_named_tracks':len(index),'unnamed_feature_count':unnamed,'tracks':index}
+          (root/'named-track-index.json').write_text(json.dumps(payload,indent=2,ensure_ascii=False),encoding='utf-8')
+          print(f"{len(index)} unique named tracks; {unnamed} unnamed features")
+          PY
+      - name: Commit index and remove one-shot workflow
+        run: |
+          rm .github/workflows/index-auckland-council-tracks.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Index Auckland Council tracks by name' || exit 0
+          git push
