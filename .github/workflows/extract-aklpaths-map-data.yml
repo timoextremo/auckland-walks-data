@@ -1,0 +1,49 @@
+name: Extract AKL Paths map data
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-aklpaths-map-data.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract map-related payload
+        run: |
+          python - <<'PY'
+          import requests,re,html,json
+          from pathlib import Path
+          ids=[305,308,133,98,86]
+          out=[]
+          for i in ids:
+            u=f'https://www.aucklandcouncil.govt.nz/en/parks-recreation/get-outdoors/aklpaths/path-detail/{i}.html'
+            t=requests.get(u,timeout=30,headers={'User-Agent':'Mozilla/5.0'}).text
+            out.append(f'=== {i} len={len(t)} ===')
+            # Unescape enough to expose JSON strings.
+            d=html.unescape(t).replace('\\"','"').replace('\\/','/')
+            # URLs likely related to geometry/maps/APIs.
+            urls=sorted(set(re.findall(r'https?://[^\"<> ]+',d)))
+            for x in urls:
+              if any(k in x.lower() for k in ['arcgis','mapserver','featureserver','geomap','map','geojson','kml','api']):
+                out.append('URL '+x[:1000])
+            # Key/value-ish snippets for map geometry hints.
+            for kw in ['mapThumbnail','mapImage','pathMap','mapData','polyline','geometry','coordinates','latitude','longitude','routeGeometry','startLatitude','startLongitude','mapUrl','mapURL','shape']:
+              poss=[m.start() for m in re.finditer(kw,d,re.I)]
+              out.append(f'{kw} count={len(poss)}')
+              for p in poss[:8]:
+                s=re.sub(r'\s+',' ',d[max(0,p-350):p+900])
+                out.append('  '+s)
+            out.append('')
+          Path('source-data').mkdir(exist_ok=True)
+          Path('source-data/aklpaths-map-data-inspection.txt').write_text('\n'.join(out),encoding='utf-8')
+          PY
+      - name: Commit result and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add source-data/aklpaths-map-data-inspection.txt
+          git rm .github/workflows/extract-aklpaths-map-data.yml
+          git commit -m 'Extract AKL Paths map payload hints'
+          git push
