@@ -1,0 +1,79 @@
+name: Fetch Auckland Council TrackTrailCycleway
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fetch-auckland-council-tracks.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch FeatureServer metadata and geometry
+        run: |
+          python - <<'PY'
+          import json, pathlib, urllib.parse, urllib.request, re, time
+
+          base = 'https://services1.arcgis.com/n4yPwebTjJCmXB6W/ArcGIS/rest/services/TrackTrailCycleway/FeatureServer'
+          out = pathlib.Path('source-data/auckland-council/TrackTrailCycleway')
+          out.mkdir(parents=True, exist_ok=True)
+
+          def get_json(url, params=None):
+              if params:
+                  url += '?' + urllib.parse.urlencode(params)
+              req = urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0 AucklandWalksData/1.0'})
+              with urllib.request.urlopen(req, timeout=60) as r:
+                  return json.load(r)
+
+          service = get_json(base, {'f':'json'})
+          (out/'service.json').write_text(json.dumps(service, indent=2, ensure_ascii=False), encoding='utf-8')
+
+          manifest = {'source': base, 'layers': []}
+          for layer in service.get('layers', []):
+              lid = layer['id']
+              lname = layer.get('name', f'layer-{lid}')
+              meta = get_json(f'{base}/{lid}', {'f':'json'})
+              (out/f'layer-{lid}-metadata.json').write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding='utf-8')
+
+              features = []
+              offset = 0
+              page_size = min(int(meta.get('maxRecordCount') or service.get('maxRecordCount') or 2000), 2000)
+              if page_size < 1: page_size = 1000
+              while True:
+                  params = {
+                      'where':'1=1', 'outFields':'*', 'returnGeometry':'true',
+                      'outSR':'4326', 'f':'geojson', 'resultOffset':offset,
+                      'resultRecordCount':page_size
+                  }
+                  page = get_json(f'{base}/{lid}/query', params)
+                  batch = page.get('features', [])
+                  features.extend(batch)
+                  if len(batch) < page_size:
+                      break
+                  offset += len(batch)
+                  if offset > 200000:
+                      raise RuntimeError(f'pagination runaway layer {lid}')
+                  time.sleep(0.1)
+
+              safe = re.sub(r'[^A-Za-z0-9._-]+','-',lname).strip('-') or f'layer-{lid}'
+              fc = {'type':'FeatureCollection','features':features}
+              fn = f'layer-{lid}-{safe}.geojson'
+              (out/fn).write_text(json.dumps(fc, ensure_ascii=False), encoding='utf-8')
+              manifest['layers'].append({'id':lid,'name':lname,'feature_count':len(features),'file':fn})
+
+          (out/'manifest.json').write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding='utf-8')
+          print(json.dumps(manifest, indent=2))
+          PY
+      - name: Commit dataset and remove one-shot workflow
+        run: |
+          rm .github/workflows/fetch-auckland-council-tracks.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Cache Auckland Council TrackTrailCycleway geometry' || exit 0
+          git push
