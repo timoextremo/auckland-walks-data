@@ -10,36 +10,33 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - name: Query Overpass for named walking geometry
+      - name: Query Overpass for walking route relations with geometry
         shell: bash
         run: |
           cat > query.overpass <<'EOF'
           [out:json][timeout:180];
-          (
-            relation["route"~"^(hiking|walking|foot)$"](-37.4,174.0,-35.8,176.0);
-            way["highway"~"^(path|footway|pedestrian|steps)$"]["name"](-37.4,174.0,-35.8,176.0);
-          );
-          out tags geom;
+          relation["route"~"^(hiking|walking|foot)$"](-37.4,174.0,-35.8,176.0);
+          out body geom;
           EOF
           curl -fL --retry 4 --retry-delay 10 \
             -A 'auckland-walks-data route audit' \
             --data-urlencode data@query.overpass \
             'https://overpass.kumi.systems/api/interpreter' \
-            -o osm-walking.json
-          test -s osm-walking.json
+            -o osm-route-relations.json
+          test -s osm-route-relations.json
       - name: Add provenance
         run: |
           cat > README.txt <<'EOF'
-          OpenStreetMap walking geometry snapshot fetched from Overpass API.
+          OpenStreetMap walking route-relation geometry snapshot fetched from Overpass API.
           Bounding box: -37.4,174.0,-35.8,176.0.
-          Includes walking/hiking/foot route relations and named path/footway/pedestrian/steps ways.
+          Includes walking/hiking/foot route relations with member geometry.
           Data © OpenStreetMap contributors, licensed under ODbL: https://www.openstreetmap.org/copyright
           EOF
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: auckland-osm-walking
+          name: auckland-osm-route-relations
           path: |
-            osm-walking.json
+            osm-route-relations.json
             README.txt
           retention-days: 1
