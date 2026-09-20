@@ -1,0 +1,37 @@
+name: Migrate Auckland Walks overlays
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/migrate-walk-overlays.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out destination
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Copy overlay data from wrcdle branch
+        run: |
+          git clone --depth 1 --branch walks-map-overlays https://github.com/timoextremo/wrcdle.git /tmp/wrcdle
+          mkdir -p map-data
+          rm -rf map-data/auckland-walks
+          cp -a /tmp/wrcdle/map-data/auckland-walks map-data/auckland-walks
+          test -f map-data/auckland-walks/auckland-linz-foot-track-clusters.kml
+          test "$(find map-data/auckland-walks/clusters -type f -name 'row-*.kml' | wc -l)" -eq 670
+
+      - name: Commit migrated data and remove temporary workflow
+        run: |
+          rm .github/workflows/migrate-walk-overlays.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Migrate Auckland Walks LINZ map overlays"
+          git push origin main
