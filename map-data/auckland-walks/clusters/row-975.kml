@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Glendowie LINZ foot track 10</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Glendowie LINZ foot track 10</name><description>Sheet row 975; LINZ t50_fid(s) 8225050</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.872974,-36.875676 174.872313,-36.875255 174.871994,-36.875007</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

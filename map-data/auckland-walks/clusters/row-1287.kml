@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Weymouth LINZ foot track 8</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Weymouth LINZ foot track 8</name><description>Sheet row 1287; LINZ t50_fid(s) 3592739</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.859522,-37.030784 174.859523,-37.030784 174.859528,-37.030782 174.860718,-37.030365</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

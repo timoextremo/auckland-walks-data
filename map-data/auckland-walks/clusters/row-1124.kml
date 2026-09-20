@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Long Bay LINZ foot track 4</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Long Bay LINZ foot track 4</name><description>Sheet row 1124; LINZ t50_fid(s) 3593278</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.752296,-36.690991 174.752183,-36.690847 174.751801,-36.690835 174.750981,-36.690373</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Bucklands Beach LINZ foot track 4</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Bucklands Beach LINZ foot track 4</name><description>Sheet row 960; LINZ t50_fid(s) 3584719</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.904215,-36.868264 174.904753,-36.868112 174.905874,-36.867975</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

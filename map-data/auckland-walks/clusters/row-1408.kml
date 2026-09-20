@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Massey LINZ foot track 6</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Massey LINZ foot track 6</name><description>Sheet row 1408; LINZ t50_fid(s) 8520977</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.622645,-36.829558 174.623495,-36.829794 174.623813,-36.829897</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Mt Roskill LINZ foot track 5</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Mt Roskill LINZ foot track 5</name><description>Sheet row 891; LINZ t50_fid(s) 3592883</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.731338,-36.931840 174.730301,-36.931140</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

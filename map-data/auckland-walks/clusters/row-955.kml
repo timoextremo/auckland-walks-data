@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Howick LINZ foot track 1</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Howick LINZ foot track 1</name><description>Sheet row 955; LINZ t50_fid(s) 3584711</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.918531,-36.903430 174.917617,-36.903868 174.916722,-36.904276</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

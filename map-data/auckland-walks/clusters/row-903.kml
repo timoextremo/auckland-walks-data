@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Meadowbank LINZ foot track 6</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Meadowbank LINZ foot track 6</name><description>Sheet row 903; LINZ t50_fid(s) 3593041</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.837688,-36.874511 174.838142,-36.873552</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

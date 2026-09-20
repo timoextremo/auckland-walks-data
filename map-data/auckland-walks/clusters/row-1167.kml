@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Milford LINZ foot track 11</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Milford LINZ foot track 11</name><description>Sheet row 1167; LINZ t50_fid(s) 8521019</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.744391,-36.760778 174.744884,-36.760577 174.745234,-36.760234 174.745382,-36.760240</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

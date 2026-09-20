@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Ōrākei LINZ foot track 5</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Ōrākei LINZ foot track 5</name><description>Sheet row 893; LINZ t50_fid(s) 3593228</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.814594,-36.852716 174.815071,-36.853268 174.815213,-36.853663</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Beach Haven LINZ foot track 1</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Beach Haven LINZ foot track 1</name><description>Sheet row 1113; LINZ t50_fid(s) 3593175</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.700260,-36.789867 174.699529,-36.790090 174.698609,-36.790339</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

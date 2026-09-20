@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Mairangi Bay LINZ foot track 15</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Mairangi Bay LINZ foot track 15</name><description>Sheet row 1125; LINZ t50_fid(s) 3593215</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.736540,-36.751364 174.735992,-36.751038 174.735547,-36.750399</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

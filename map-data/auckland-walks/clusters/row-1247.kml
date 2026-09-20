@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Papatoetoe LINZ foot track 3</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Papatoetoe LINZ foot track 3</name><description>Sheet row 1247; LINZ t50_fid(s) 3584615</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.850177,-36.979838 174.847788,-36.979805</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

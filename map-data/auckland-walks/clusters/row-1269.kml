@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Manurewa LINZ foot track 5</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Manurewa LINZ foot track 5</name><description>Sheet row 1269; LINZ t50_fid(s) 3584612</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.886733,-37.011767 174.886442,-37.010639 174.886439,-37.010626</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

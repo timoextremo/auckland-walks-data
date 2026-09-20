@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Piha LINZ foot track 2</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Piha LINZ foot track 2</name><description>Sheet row 1428; LINZ t50_fid(s) 3592498</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.497140,-36.947462 174.497250,-36.947806 174.496952,-36.948405 174.496487,-36.948977</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

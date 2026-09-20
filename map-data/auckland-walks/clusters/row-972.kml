@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>St Heliers LINZ foot track 6</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>St Heliers LINZ foot track 6</name><description>Sheet row 972; LINZ t50_fid(s) 3593050</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.863711,-36.862009 174.864132,-36.861816 174.864815,-36.861442</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

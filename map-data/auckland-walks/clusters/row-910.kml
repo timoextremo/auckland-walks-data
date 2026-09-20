@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Devonport LINZ foot track 3</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Devonport LINZ foot track 3</name><description>Sheet row 910; LINZ t50_fid(s) 3593232</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.784496,-36.812564 174.784810,-36.813006 174.784925,-36.813260 174.785051,-36.813455</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

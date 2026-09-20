@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Panmure LINZ foot track 4</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Panmure LINZ foot track 4</name><description>Sheet row 890; LINZ t50_fid(s) 3593020</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.857748,-36.894711 174.857267,-36.893971 174.857155,-36.893729</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

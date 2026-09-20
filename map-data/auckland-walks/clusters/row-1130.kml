@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Bayview LINZ foot track 3</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Bayview LINZ foot track 3</name><description>Sheet row 1130; LINZ t50_fid(s) 3593178</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.713887,-36.778629 174.713385,-36.778214 174.713081,-36.777974 174.712801,-36.777750</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Half Moon Bay LINZ foot track 9</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Half Moon Bay LINZ foot track 9</name><description>Sheet row 966; LINZ t50_fid(s) 3593034</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.895848,-36.884539 174.895530,-36.884250 174.894917,-36.884835</coordinates></LineString></MultiGeometry></Placemark></Document></kml>

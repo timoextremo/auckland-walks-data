@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Glen Eden LINZ foot track 3</name><Style id="c"><LineStyle><color>ffff00ff</color><width>5</width></LineStyle></Style><Placemark><name>Glen Eden LINZ foot track 3</name><description>Sheet row 1348; LINZ t50_fid(s) 3584640</description><styleUrl>#c</styleUrl><MultiGeometry><LineString><tessellate>1</tessellate><coordinates>174.644538,-36.912669 174.642193,-36.912239</coordinates></LineString></MultiGeometry></Placemark></Document></kml>
