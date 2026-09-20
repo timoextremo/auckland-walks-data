@@ -1,0 +1,2063 @@
+[
+  {
+    "row": 608,
+    "sheet_name": "Lower Kauri Track",
+    "location": "Te Piringa / Cascade Kauri",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Lower Kauri Track",
+        "feature_count": 1,
+        "objectids": [
+          26
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.500964410179,
+          -36.8914964956649,
+          174.515560100884,
+          -36.8885505842731
+        ],
+        "shape_length_sum_m": 2020.45,
+        "file": "named/lower-kauri-track-638155f3.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Lower Loop",
+        "feature_count": 3,
+        "objectids": [
+          1677,
+          12536,
+          12639
+        ],
+        "statuses": [
+          "Closed Dieback",
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.601543194336,
+          -36.9441116005929,
+          175.067134573436,
+          -36.804211208513
+        ],
+        "shape_length_sum_m": 1361.77,
+        "file": "named/lower-loop-04f3ee17.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Lower Link Track",
+        "feature_count": 1,
+        "objectids": [
+          1783
+        ],
+        "statuses": [
+          "Closed upgrade"
+        ],
+        "bbox_wgs84": [
+          175.27709123358,
+          -37.0448222389448,
+          175.278558147972,
+          -37.0402896964095
+        ],
+        "shape_length_sum_m": 584.91,
+        "file": "named/lower-link-track-f0ed48da.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Lower Mangatawhiri Track",
+        "feature_count": 2,
+        "objectids": [
+          2364,
+          12191
+        ],
+        "statuses": [
+          "Permanent",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          175.143586230923,
+          -37.1398823143794,
+          175.165023959206,
+          -37.1071218347299
+        ],
+        "shape_length_sum_m": 5904.12,
+        "file": "named/lower-mangatawhiri-track-4bd48778.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Lower Nihotapu Dam Road",
+        "feature_count": 2,
+        "objectids": [
+          3232,
+          3233
+        ],
+        "statuses": [
+          "Closed Dieback",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.588258447154,
+          -36.9574080008272,
+          174.599244050752,
+          -36.9565566568089
+        ],
+        "shape_length_sum_m": 1087.91,
+        "file": "named/lower-nihotapu-dam-road-912fee89.geojson"
+      }
+    ]
+  },
+  {
+    "row": 609,
+    "sheet_name": "100 Acre Track",
+    "location": "Long Bay Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "100 Acre Track",
+        "feature_count": 1,
+        "objectids": [
+          12257
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.741715051246,
+          -36.6773230654221,
+          174.747508992936,
+          -36.674698560494
+        ],
+        "shape_length_sum_m": 1192.15,
+        "file": "named/100-acre-track-d2403d66.geojson"
+      }
+    ]
+  },
+  {
+    "row": 610,
+    "sheet_name": "Rangemore Track",
+    "location": "Waitākere Ranges",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Rangemore Track",
+        "feature_count": 1,
+        "objectids": [
+          2618
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.586763877402,
+          -36.9434962381533,
+          174.593628137346,
+          -36.9394080788896
+        ],
+        "shape_length_sum_m": 1690.97,
+        "file": "named/rangemore-track-383ebee9.geojson"
+      }
+    ]
+  },
+  {
+    "row": 611,
+    "sheet_name": "Swanson Pipeline Track",
+    "location": "Swanson / Waitākere Ranges",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Pipeline Track",
+        "feature_count": 3,
+        "objectids": [
+          204,
+          3230,
+          3231
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.582972384598,
+          -36.9599005332586,
+          174.603447512276,
+          -36.9532658243894
+        ],
+        "shape_length_sum_m": 1868.63,
+        "file": "named/pipeline-track-36334a31.geojson"
+      },
+      {
+        "score": 100.0,
+        "trackname": "Swanson Pipeline Track",
+        "feature_count": 3,
+        "objectids": [
+          124,
+          2759,
+          2935
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.556056663531,
+          -36.8921965403396,
+          174.560895833484,
+          -36.8791143424397
+        ],
+        "shape_length_sum_m": 1747.87,
+        "file": "named/swanson-pipeline-track-d1d571a0.geojson"
+      },
+      {
+        "score": 68.8,
+        "trackname": "Opanuku Pipeline Track",
+        "feature_count": 2,
+        "objectids": [
+          855,
+          12253
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.5567635955,
+          -36.8996761360057,
+          174.566363587616,
+          -36.8923655861306
+        ],
+        "shape_length_sum_m": 1370.19,
+        "file": "named/opanuku-pipeline-track-6e79786f.geojson"
+      }
+    ]
+  },
+  {
+    "row": 612,
+    "sheet_name": "Waitākere Tramline Walk",
+    "location": "Waitākere Dam / Cascade Kauri",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Waitakere Tramline Walk",
+        "feature_count": 2,
+        "objectids": [
+          3219,
+          3243
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.531153325696,
+          -36.8992158103314,
+          174.54069942558,
+          -36.8927274706987
+        ],
+        "shape_length_sum_m": 1467.74,
+        "file": "named/waitakere-tramline-walk-eddc78ca.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Waitakere Dam Walk",
+        "feature_count": 2,
+        "objectids": [
+          805,
+          3247
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.527854932943,
+          -36.901672913474,
+          174.543317706203,
+          -36.8984804620327
+        ],
+        "shape_length_sum_m": 1643.33,
+        "file": "named/waitakere-dam-walk-15a5f1e7.geojson"
+      }
+    ]
+  },
+  {
+    "row": 613,
+    "sheet_name": "Robinson Ridge Track",
+    "location": "Waitākere Ranges",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Robinson Ridge Track",
+        "feature_count": 1,
+        "objectids": [
+          1184
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.514812549081,
+          -36.9077631387877,
+          174.520637759994,
+          -36.8935162380113
+        ],
+        "shape_length_sum_m": 2115.64,
+        "file": "named/robinson-ridge-track-7b73d1ab.geojson"
+      },
+      {
+        "score": 69.6,
+        "trackname": "ZionRidge Track",
+        "feature_count": 1,
+        "objectids": [
+          283
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.48189384423,
+          -36.9981079949837,
+          174.496496156755,
+          -36.9966357609492
+        ],
+        "shape_length_sum_m": 1407.65,
+        "file": "named/zionridge-track-2f4a87af.geojson"
+      }
+    ]
+  },
+  {
+    "row": 614,
+    "sheet_name": "Taumata Track",
+    "location": "Waitākere Ranges",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Taumata Track",
+        "feature_count": 1,
+        "objectids": [
+          719
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.570045516287,
+          -36.9218447999523,
+          174.573687963601,
+          -36.9191729345798
+        ],
+        "shape_length_sum_m": 821.85,
+        "file": "named/taumata-track-b5c059c8.geojson"
+      }
+    ]
+  },
+  {
+    "row": 615,
+    "sheet_name": "Mountain Road Walkway",
+    "location": "Henderson Valley",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Mountain Bike Track",
+        "feature_count": 3,
+        "objectids": [
+          708,
+          2105,
+          2387
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.262030404561,
+          -36.9838317251072,
+          175.267439812478,
+          -36.9793898979929
+        ],
+        "shape_length_sum_m": 954.69,
+        "file": "named/mountain-bike-track-6676ec5f.geojson"
+      },
+      {
+        "score": 76.9,
+        "trackname": "Motutara Road",
+        "feature_count": 1,
+        "objectids": [
+          2961
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.425744686923,
+          -36.8310342572564,
+          174.42821402622,
+          -36.8302220454424
+        ],
+        "shape_length_sum_m": 241.19,
+        "file": "named/motutara-road-6daf88fd.geojson"
+      },
+      {
+        "score": 72.7,
+        "trackname": "Mine Road",
+        "feature_count": 1,
+        "objectids": [
+          12781
+        ],
+        "statuses": [
+          "Closed upgrade"
+        ],
+        "bbox_wgs84": [
+          175.173048230365,
+          -37.0409199087282,
+          175.184437200469,
+          -37.0269651793659
+        ],
+        "shape_length_sum_m": 2086.72,
+        "file": "named/mine-road-f405d29e.geojson"
+      },
+      {
+        "score": 72.7,
+        "trackname": "Mine Road Track",
+        "feature_count": 1,
+        "objectids": [
+          2517
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.179092227943,
+          -37.0559350815065,
+          175.191146660469,
+          -37.0409199087282
+        ],
+        "shape_length_sum_m": 3131.72,
+        "file": "named/mine-road-track-51c54e5e.geojson"
+      },
+      {
+        "score": 72.7,
+        "trackname": "Oaia Road",
+        "feature_count": 1,
+        "objectids": [
+          2888
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.434006282158,
+          -36.8430500768343,
+          174.448299020761,
+          -36.8291126239626
+        ],
+        "shape_length_sum_m": 2626.5,
+        "file": "named/oaia-road-14597cc0.geojson"
+      }
+    ]
+  },
+  {
+    "row": 617,
+    "sheet_name": "Pae o te Rangi Farm Summit Track",
+    "location": "Pae o te Rangi / Waitākere Ranges",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Summit Track",
+        "feature_count": 2,
+        "objectids": [
+          14,
+          12207
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.562912931892,
+          -36.9707699789115,
+          174.58167757178,
+          -36.9516342819677
+        ],
+        "shape_length_sum_m": 3701.24,
+        "file": "named/summit-track-386dd49f.geojson"
+      }
+    ]
+  },
+  {
+    "row": 619,
+    "sheet_name": "Govan Wilson to Puhoi Valley",
+    "location": "Matakana / Dome Valley / Puhoi",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Puhoi Track",
+        "feature_count": 2,
+        "objectids": [
+          838,
+          1767
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.706143361376,
+          -36.5399106354863,
+          174.71204000151,
+          -36.5372650738624
+        ],
+        "shape_length_sum_m": 735.79,
+        "file": "named/puhoi-track-ab464c1a.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Valley Track",
+        "feature_count": 2,
+        "objectids": [
+          12535,
+          12730
+        ],
+        "statuses": [
+          "Open",
+          "Open pending closure"
+        ],
+        "bbox_wgs84": [
+          175.068213040306,
+          -36.8105956809536,
+          175.069817951801,
+          -36.8071011602652
+        ],
+        "shape_length_sum_m": 499.09,
+        "file": "named/valley-track-f5e6254a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 620,
+    "sheet_name": "Puhoi Track",
+    "location": "Puhoi",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Puhoi Track",
+        "feature_count": 2,
+        "objectids": [
+          838,
+          1767
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.706143361376,
+          -36.5399106354863,
+          174.71204000151,
+          -36.5372650738624
+        ],
+        "shape_length_sum_m": 735.79,
+        "file": "named/puhoi-track-ab464c1a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 621,
+    "sheet_name": "Puhoi Track Bypass",
+    "location": "Puhoi",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Puhoi Track",
+        "feature_count": 2,
+        "objectids": [
+          838,
+          1767
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.706143361376,
+          -36.5399106354863,
+          174.71204000151,
+          -36.5372650738624
+        ],
+        "shape_length_sum_m": 735.79,
+        "file": "named/puhoi-track-ab464c1a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 622,
+    "sheet_name": "Puhoi to Wenderholm Road Bypass",
+    "location": "Puhoi / Wenderholm",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Puhoi Track",
+        "feature_count": 2,
+        "objectids": [
+          838,
+          1767
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.706143361376,
+          -36.5399106354863,
+          174.71204000151,
+          -36.5372650738624
+        ],
+        "shape_length_sum_m": 735.79,
+        "file": "named/puhoi-track-ab464c1a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 625,
+    "sheet_name": "North Shore Coastal Walk",
+    "location": "Long Bay to Devonport",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Coastal Track",
+        "feature_count": 5,
+        "objectids": [
+          59,
+          2728,
+          12173,
+          12222,
+          12407
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.739560768757,
+          -36.6819841883423,
+          174.748301197462,
+          -36.6613508506994
+        ],
+        "shape_length_sum_m": 4437.17,
+        "file": "named/coastal-track-53dae36f.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Coastal Walk",
+        "feature_count": 2,
+        "objectids": [
+          849,
+          1556
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          175.259830344613,
+          -36.9831776075024,
+          175.268943246768,
+          -36.9765021010121
+        ],
+        "shape_length_sum_m": 1389.28,
+        "file": "named/coastal-walk-a04fd5cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "North Coast Track",
+        "feature_count": 3,
+        "objectids": [
+          1760,
+          1946,
+          2979
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.838518792259,
+          -36.3723331836262,
+          174.858343185764,
+          -36.3686783574575
+        ],
+        "shape_length_sum_m": 1963.04,
+        "file": "named/north-coast-track-8629f8ad.geojson"
+      }
+    ]
+  },
+  {
+    "row": 630,
+    "sheet_name": "Mangatāwhiri to Mercer",
+    "location": "Mangatāwhiri / Mercer",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Mangatawhiri Challenge Track",
+        "feature_count": 11,
+        "objectids": [
+          299,
+          353,
+          435,
+          604,
+          781,
+          1844,
+          2601,
+          2863,
+          2900,
+          3005,
+          3080
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.14148774284,
+          -37.1071419979661,
+          175.151836836604,
+          -37.0643471978106
+        ],
+        "shape_length_sum_m": 9665.3,
+        "file": "named/mangatawhiri-challenge-track-65c5bbc1.geojson"
+      }
+    ]
+  },
+  {
+    "row": 631,
+    "sheet_name": "Te Ara Ki Uta Ki Tai",
+    "location": "Glen Innes / Meadowbank / Ōrākei / Tāmaki Drive",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Toki Reserve loop",
+        "feature_count": 1,
+        "objectids": [
+          7905
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.041728329459,
+          -36.7938883289206,
+          175.0466232764,
+          -36.7890473484596
+        ],
+        "shape_length_sum_m": 1718.75,
+        "file": "named/te-toki-reserve-loop-39a3e8bd.geojson"
+      }
+    ]
+  },
+  {
+    "row": 633,
+    "sheet_name": "Te Ara I Whiti / The Lightpath",
+    "location": "Auckland CBD / Karangahape",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Toki Reserve loop",
+        "feature_count": 1,
+        "objectids": [
+          7905
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.041728329459,
+          -36.7938883289206,
+          175.0466232764,
+          -36.7890473484596
+        ],
+        "shape_length_sum_m": 1718.75,
+        "file": "named/te-toki-reserve-loop-39a3e8bd.geojson"
+      }
+    ]
+  },
+  {
+    "row": 639,
+    "sheet_name": "Southern Path",
+    "location": "Takaanini / Conifer Grove / Papakura",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Andersons Southern Access",
+        "feature_count": 1,
+        "objectids": [
+          1576
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          174.542778965095,
+          -36.8900243631305,
+          174.545564361416,
+          -36.889206801264
+        ],
+        "shape_length_sum_m": 279.45,
+        "file": "named/andersons-southern-access-f673d3db.geojson"
+      }
+    ]
+  },
+  {
+    "row": 640,
+    "sheet_name": "Te Whau Pathway",
+    "location": "Te Atatū / Whau River / Avondale / New Lynn / Green Bay",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Te Whau Pathway",
+        "feature_count": 20,
+        "objectids": [
+          3269,
+          3272,
+          3274,
+          3276,
+          3280,
+          3281,
+          3282,
+          3283,
+          3284,
+          3287,
+          3288,
+          3289,
+          3290,
+          3291,
+          3292,
+          3293,
+          3294,
+          3295,
+          3297,
+          3300
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.652474316606,
+          -36.9229368390061,
+          174.692337119037,
+          -36.8678532285809
+        ],
+        "shape_length_sum_m": 5411.44,
+        "file": "named/te-whau-pathway-e3aba9b7.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      }
+    ]
+  },
+  {
+    "row": 641,
+    "sheet_name": "Matakana Trail",
+    "location": "Matakana / Omaha",
+    "candidates": [
+      {
+        "score": 87.5,
+        "trackname": "Matapana Track",
+        "feature_count": 1,
+        "objectids": [
+          6604
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.04607384659,
+          -36.7799154457358,
+          175.046788250306,
+          -36.7792556308658
+        ],
+        "shape_length_sum_m": 143.37,
+        "file": "named/matapana-track-90e3c3f0.geojson"
+      }
+    ]
+  },
+  {
+    "row": 642,
+    "sheet_name": "Northcote Path",
+    "location": "Northcote Point / Northcote / Smales Farm",
+    "candidates": [
+      {
+        "score": 80.0,
+        "trackname": "North Coast Track",
+        "feature_count": 3,
+        "objectids": [
+          1760,
+          1946,
+          2979
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.838518792259,
+          -36.3723331836262,
+          174.858343185764,
+          -36.3686783574575
+        ],
+        "shape_length_sum_m": 1963.04,
+        "file": "named/north-coast-track-8629f8ad.geojson"
+      }
+    ]
+  },
+  {
+    "row": 645,
+    "sheet_name": "Cascades Path",
+    "location": "Highland Park / Pakuranga",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Cascade Track",
+        "feature_count": 2,
+        "objectids": [
+          2692,
+          3220
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.518456905637,
+          -36.8935523823274,
+          174.524108074218,
+          -36.8893714006631
+        ],
+        "shape_length_sum_m": 1349.57,
+        "file": "named/cascade-track-03dc0afe.geojson"
+      },
+      {
+        "score": 100.0,
+        "trackname": "Cascades Loop Track",
+        "feature_count": 1,
+        "objectids": [
+          1255
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.084778011139,
+          -36.8196017408437,
+          175.085826971656,
+          -36.8185316413956
+        ],
+        "shape_length_sum_m": 358.57,
+        "file": "named/cascades-loop-track-22adf5af.geojson"
+      },
+      {
+        "score": 70.0,
+        "trackname": "Cascade Link",
+        "feature_count": 1,
+        "objectids": [
+          1237
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.084502195858,
+          -36.819278203463,
+          175.084901799953,
+          -36.8184826797885
+        ],
+        "shape_length_sum_m": 110.87,
+        "file": "named/cascade-link-bc8d3f4f.geojson"
+      }
+    ]
+  },
+  {
+    "row": 646,
+    "sheet_name": "Henderson Path",
+    "location": "Henderson / West Auckland",
+    "candidates": [
+      {
+        "score": 82.4,
+        "trackname": "Anderson Track",
+        "feature_count": 3,
+        "objectids": [
+          415,
+          2422,
+          2624
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.526200718161,
+          -36.8914409803521,
+          174.543322335032,
+          -36.8873524863009
+        ],
+        "shape_length_sum_m": 2152.38,
+        "file": "named/anderson-track-31bcaea0.geojson"
+      }
+    ]
+  },
+  {
+    "row": 650,
+    "sheet_name": "Orange Loop Track",
+    "location": "Te Muri Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Orange track",
+        "feature_count": 2,
+        "objectids": [
+          12801,
+          12802
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.249720775226,
+          -36.4958613361095,
+          174.265537676712,
+          -36.4832344905761
+        ],
+        "shape_length_sum_m": 2980.55,
+        "file": "named/orange-track-98856efd.geojson"
+      }
+    ]
+  },
+  {
+    "row": 651,
+    "sheet_name": "Pig Sty Track",
+    "location": "Scandrett Regional Park",
+    "candidates": [
+      {
+        "score": 92.3,
+        "trackname": "Pigsty Track",
+        "feature_count": 2,
+        "objectids": [
+          1558,
+          1580
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.773926668975,
+          -36.4442273643924,
+          174.774632133699,
+          -36.4426456123218
+        ],
+        "shape_length_sum_m": 197.38,
+        "file": "named/pigsty-track-410b74d0.geojson"
+      }
+    ]
+  },
+  {
+    "row": 652,
+    "sheet_name": "Kawau Bay Track",
+    "location": "Scandrett Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Kawau Bay Track",
+        "feature_count": 1,
+        "objectids": [
+          1205
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.773926668975,
+          -36.4426456123218,
+          174.779001713727,
+          -36.4397932006792
+        ],
+        "shape_length_sum_m": 639.48,
+        "file": "named/kawau-bay-track-0534af37.geojson"
+      }
+    ]
+  },
+  {
+    "row": 653,
+    "sheet_name": "Mullet Point Track",
+    "location": "Scandrett Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Mullet Point Track",
+        "feature_count": 4,
+        "objectids": [
+          81,
+          141,
+          1733,
+          2897
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.769204058819,
+          -36.4446359290313,
+          174.779962913293,
+          -36.4376759321305
+        ],
+        "shape_length_sum_m": 1447.69,
+        "file": "named/mullet-point-track-8270d1c0.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      }
+    ]
+  },
+  {
+    "row": 654,
+    "sheet_name": "Orchard Track",
+    "location": "Scandrett Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Orchard Track",
+        "feature_count": 1,
+        "objectids": [
+          556
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.769095326112,
+          -36.4426633530844,
+          174.773926668975,
+          -36.4416298165881
+        ],
+        "shape_length_sum_m": 459.32,
+        "file": "named/orchard-track-ce3f4678.geojson"
+      }
+    ]
+  },
+  {
+    "row": 655,
+    "sheet_name": "Lower Link Track",
+    "location": "Waharau Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Lower Link Track",
+        "feature_count": 1,
+        "objectids": [
+          1783
+        ],
+        "statuses": [
+          "Closed upgrade"
+        ],
+        "bbox_wgs84": [
+          175.27709123358,
+          -37.0448222389448,
+          175.278558147972,
+          -37.0402896964095
+        ],
+        "shape_length_sum_m": 584.91,
+        "file": "named/lower-link-track-f0ed48da.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Lower Loop",
+        "feature_count": 3,
+        "objectids": [
+          1677,
+          12536,
+          12639
+        ],
+        "statuses": [
+          "Closed Dieback",
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.601543194336,
+          -36.9441116005929,
+          175.067134573436,
+          -36.804211208513
+        ],
+        "shape_length_sum_m": 1361.77,
+        "file": "named/lower-loop-04f3ee17.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Lower Kauri Track",
+        "feature_count": 1,
+        "objectids": [
+          26
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.500964410179,
+          -36.8914964956649,
+          174.515560100884,
+          -36.8885505842731
+        ],
+        "shape_length_sum_m": 2020.45,
+        "file": "named/lower-kauri-track-638155f3.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Lower Mangatawhiri Track",
+        "feature_count": 2,
+        "objectids": [
+          2364,
+          12191
+        ],
+        "statuses": [
+          "Permanent",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          175.143586230923,
+          -37.1398823143794,
+          175.165023959206,
+          -37.1071218347299
+        ],
+        "shape_length_sum_m": 5904.12,
+        "file": "named/lower-mangatawhiri-track-4bd48778.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Lower Nihotapu Dam Road",
+        "feature_count": 2,
+        "objectids": [
+          3232,
+          3233
+        ],
+        "statuses": [
+          "Closed Dieback",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.588258447154,
+          -36.9574080008272,
+          174.599244050752,
+          -36.9565566568089
+        ],
+        "shape_length_sum_m": 1087.91,
+        "file": "named/lower-nihotapu-dam-road-912fee89.geojson"
+      }
+    ]
+  },
+  {
+    "row": 656,
+    "sheet_name": "Whakatīwai Ridge Track",
+    "location": "Whakatīwai Regional Park",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Whakatīwai Track",
+        "feature_count": 1,
+        "objectids": [
+          65
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          175.247713991532,
+          -37.0770161070863,
+          175.295715614291,
+          -37.0688976385795
+        ],
+        "shape_length_sum_m": 5334.65,
+        "file": "named/whakat-wai-track-cfabefdd.geojson"
+      },
+      {
+        "score": 71.0,
+        "trackname": "Kakamatua Ridge Track",
+        "feature_count": 1,
+        "objectids": [
+          2927
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.578857100094,
+          -36.9934214627675,
+          174.581388948161,
+          -36.9831706116765
+        ],
+        "shape_length_sum_m": 1280.94,
+        "file": "named/kakamatua-ridge-track-a49d9e27.geojson"
+      },
+      {
+        "score": 69.2,
+        "trackname": "Huai Ridge Track",
+        "feature_count": 1,
+        "objectids": [
+          1001
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.53304401416,
+          -36.9820938791681,
+          174.534014038751,
+          -36.9795608627431
+        ],
+        "shape_length_sum_m": 331.39,
+        "file": "named/huai-ridge-track-9a2f68d5.geojson"
+      },
+      {
+        "score": 69.2,
+        "trackname": "Rata Ridge Track",
+        "feature_count": 2,
+        "objectids": [
+          531,
+          1365
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.184040849779,
+          -37.0756058256501,
+          175.198401953838,
+          -37.0687060963218
+        ],
+        "shape_length_sum_m": 3175.26,
+        "file": "named/rata-ridge-track-e10516f5.geojson"
+      },
+      {
+        "score": 69.0,
+        "trackname": "Waharau Ridge Track",
+        "feature_count": 10,
+        "objectids": [
+          361,
+          1471,
+          2419,
+          2802,
+          12175,
+          12186,
+          12229,
+          12274,
+          12275,
+          12812
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          175.247629385561,
+          -37.068899289974,
+          175.289311563121,
+          -37.0372792971388
+        ],
+        "shape_length_sum_m": 11439.32,
+        "file": "named/waharau-ridge-track-7b264508.geojson"
+      }
+    ]
+  },
+  {
+    "row": 658,
+    "sheet_name": "Twin Highways Path",
+    "location": "Greenhithe / Unsworth Heights / Constellation / Albany / Ōteha Valley",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Twin Peaks Track",
+        "feature_count": 3,
+        "objectids": [
+          429,
+          2099,
+          2988
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.533597385514,
+          -36.9984385327244,
+          174.566812676702,
+          -36.9820938791681
+        ],
+        "shape_length_sum_m": 4934.44,
+        "file": "named/twin-peaks-track-21e49a1a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 659,
+    "sheet_name": "Helensville River Walkway",
+    "location": "Helensville",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "River Track",
+        "feature_count": 1,
+        "objectids": [
+          2490
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.153540921949,
+          -37.1098572629123,
+          175.16342821329,
+          -37.1034605244035
+        ],
+        "shape_length_sum_m": 2084.42,
+        "file": "named/river-track-4709e442.geojson"
+      }
+    ]
+  },
+  {
+    "row": 660,
+    "sheet_name": "Kowhai Valley Track",
+    "location": "Aotea / Great Barrier Island — Rosalie Bay Road to Medlands",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Kowhai Track",
+        "feature_count": 2,
+        "objectids": [
+          1066,
+          2635
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.070953956832,
+          -36.9077356434507,
+          175.083888185288,
+          -36.814141253919
+        ],
+        "shape_length_sum_m": 956.0,
+        "file": "named/kowhai-track-4aa854aa.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Valley Track",
+        "feature_count": 2,
+        "objectids": [
+          12535,
+          12730
+        ],
+        "statuses": [
+          "Open",
+          "Open pending closure"
+        ],
+        "bbox_wgs84": [
+          175.068213040306,
+          -36.8105956809536,
+          175.069817951801,
+          -36.8071011602652
+        ],
+        "shape_length_sum_m": 499.09,
+        "file": "named/valley-track-f5e6254a.geojson"
+      },
+      {
+        "score": 75.0,
+        "trackname": "Piha Valley Track",
+        "feature_count": 2,
+        "objectids": [
+          10,
+          300
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          174.484545618907,
+          -36.9520892018353,
+          174.503381732405,
+          -36.9484404419213
+        ],
+        "shape_length_sum_m": 2241.77,
+        "file": "named/piha-valley-track-07e4cc88.geojson"
+      }
+    ]
+  },
+  {
+    "row": 661,
+    "sheet_name": "Island Bay Track",
+    "location": "Aotea / Great Barrier Island — Cape Barrier Road",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Island Bay Track",
+        "feature_count": 1,
+        "objectids": [
+          11980
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.99804345155,
+          -36.7744047349133,
+          175.006264109518,
+          -36.7689420317608
+        ],
+        "shape_length_sum_m": 2003.17,
+        "file": "named/island-bay-track-a07f8ff1.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Island Bay to Fossil Bay",
+        "feature_count": 1,
+        "objectids": [
+          12040
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          175.001115252496,
+          -36.770284984206,
+          175.002607718064,
+          -36.769326111973
+        ],
+        "shape_length_sum_m": 248.02,
+        "file": "named/island-bay-to-fossil-bay-1de0e4ca.geojson"
+      }
+    ]
+  },
+  {
+    "row": 663,
+    "sheet_name": "Johnson's Bay, Whalers Lookout & Ruahine Lookout",
+    "location": "Aotea / Great Barrier Island — Cape Barrier Road",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Lookout Track",
+        "feature_count": 7,
+        "objectids": [
+          73,
+          130,
+          1521,
+          1724,
+          1941,
+          2130,
+          2335
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.430638817311,
+          -36.8323264317504,
+          174.821637359634,
+          -36.4406822370342
+        ],
+        "shape_length_sum_m": 1388.51,
+        "file": "named/lookout-track-b59e8dd9.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Lookout Walk",
+        "feature_count": 1,
+        "objectids": [
+          231
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.089950164266,
+          -37.068322071344,
+          175.090442288169,
+          -37.0668260722097
+        ],
+        "shape_length_sum_m": 184.99,
+        "file": "named/lookout-walk-3e9f612a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 665,
+    "sheet_name": "Kitekite Track",
+    "location": "Piha, Waitākere Ranges Regional Park",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Kitekite Track",
+        "feature_count": 3,
+        "objectids": [
+          12188,
+          12199,
+          12266
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.485179718817,
+          -36.9603427998441,
+          174.488412138019,
+          -36.9534507701395
+        ],
+        "shape_length_sum_m": 906.78,
+        "file": "named/kitekite-track-86c721f5.geojson"
+      }
+    ]
+  },
+  {
+    "row": 667,
+    "sheet_name": "Nikau Grove Walk",
+    "location": "Piha, Waitākere Ranges",
+    "candidates": [
+      {
+        "score": 81.8,
+        "trackname": "Kauri Grove Track",
+        "feature_count": 5,
+        "objectids": [
+          423,
+          1119,
+          1653,
+          12192,
+          12236
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.490522685922,
+          -36.9670849588454,
+          174.514911845375,
+          -36.9606418589098
+        ],
+        "shape_length_sum_m": 3475.63,
+        "file": "named/kauri-grove-track-e7750785.geojson"
+      }
+    ]
+  },
+  {
+    "row": 671,
+    "sheet_name": "Macmillan Road Walkway",
+    "location": "Aotea / Great Barrier Island — Macmillan Road",
+    "candidates": [
+      {
+        "score": 69.6,
+        "trackname": "Mine Road",
+        "feature_count": 1,
+        "objectids": [
+          12781
+        ],
+        "statuses": [
+          "Closed upgrade"
+        ],
+        "bbox_wgs84": [
+          175.173048230365,
+          -37.0409199087282,
+          175.184437200469,
+          -37.0269651793659
+        ],
+        "shape_length_sum_m": 2086.72,
+        "file": "named/mine-road-f405d29e.geojson"
+      },
+      {
+        "score": 69.6,
+        "trackname": "Mine Road Track",
+        "feature_count": 1,
+        "objectids": [
+          2517
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.179092227943,
+          -37.0559350815065,
+          175.191146660469,
+          -37.0409199087282
+        ],
+        "shape_length_sum_m": 3131.72,
+        "file": "named/mine-road-track-51c54e5e.geojson"
+      },
+      {
+        "score": 69.6,
+        "trackname": "Oaia Road",
+        "feature_count": 1,
+        "objectids": [
+          2888
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.434006282158,
+          -36.8430500768343,
+          174.448299020761,
+          -36.8291126239626
+        ],
+        "shape_length_sum_m": 2626.5,
+        "file": "named/oaia-road-14597cc0.geojson"
+      }
+    ]
+  },
+  {
+    "row": 673,
+    "sheet_name": "Lilburne Road Track",
+    "location": "Hūnua Ranges — Upper Mangatāwhiri",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Lilburne Road Track",
+        "feature_count": 5,
+        "objectids": [
+          722,
+          1887,
+          2666,
+          3117,
+          3151
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.152898221071,
+          -37.0894905440677,
+          175.185239982339,
+          -37.0703394045599
+        ],
+        "shape_length_sum_m": 4958.89,
+        "file": "named/lilburne-road-track-b5c308f6.geojson"
+      },
+      {
+        "score": 72.7,
+        "trackname": "Mine Road",
+        "feature_count": 1,
+        "objectids": [
+          12781
+        ],
+        "statuses": [
+          "Closed upgrade"
+        ],
+        "bbox_wgs84": [
+          175.173048230365,
+          -37.0409199087282,
+          175.184437200469,
+          -37.0269651793659
+        ],
+        "shape_length_sum_m": 2086.72,
+        "file": "named/mine-road-f405d29e.geojson"
+      },
+      {
+        "score": 72.7,
+        "trackname": "Mine Road Track",
+        "feature_count": 1,
+        "objectids": [
+          2517
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.179092227943,
+          -37.0559350815065,
+          175.191146660469,
+          -37.0409199087282
+        ],
+        "shape_length_sum_m": 3131.72,
+        "file": "named/mine-road-track-51c54e5e.geojson"
+      },
+      {
+        "score": 69.2,
+        "trackname": "Pipeline Road",
+        "feature_count": 2,
+        "objectids": [
+          2496,
+          3229
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.599135515198,
+          -36.9566287314964,
+          174.62429425331,
+          -36.9511769062026
+        ],
+        "shape_length_sum_m": 2744.84,
+        "file": "named/pipeline-road-4253919e.geojson"
+      }
+    ]
+  },
+  {
+    "row": 674,
+    "sheet_name": "Cossey Access Track",
+    "location": "Hūnua Ranges — Cosseys Reservoir",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Cossey Access Road",
+        "feature_count": 1,
+        "objectids": [
+          12768
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.093448450894,
+          -37.0633337058592,
+          175.102817420947,
+          -37.0608750699578
+        ],
+        "shape_length_sum_m": 1056.2,
+        "file": "named/cossey-access-road-50160e6c.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Cossey George Track",
+        "feature_count": 1,
+        "objectids": [
+          1223
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.093287977255,
+          -37.0641726262085,
+          175.103808263893,
+          -37.0602475514649
+        ],
+        "shape_length_sum_m": 1409.24,
+        "file": "named/cossey-george-track-4d1b283e.geojson"
+      }
+    ]
+  }
+]

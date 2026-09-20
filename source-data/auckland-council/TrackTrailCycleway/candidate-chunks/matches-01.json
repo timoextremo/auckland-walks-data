@@ -1,0 +1,1813 @@
+[
+  {
+    "row": 4,
+    "sheet_name": "Hooton Reserve Path",
+    "location": "Albany",
+    "candidates": [
+      {
+        "score": 71.4,
+        "trackname": "Houghton Track",
+        "feature_count": 1,
+        "objectids": [
+          1062
+        ],
+        "statuses": [
+          "Closed upgrade"
+        ],
+        "bbox_wgs84": [
+          174.469954414753,
+          -36.9014691235532,
+          174.479102108482,
+          -36.8926579366189
+        ],
+        "shape_length_sum_m": 1964.4,
+        "file": "named/houghton-track-9b17968a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 7,
+    "sheet_name": "Shakespear Lookout Track",
+    "location": "Shakespear Regional Park",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Lookout Track",
+        "feature_count": 7,
+        "objectids": [
+          73,
+          130,
+          1521,
+          1724,
+          1941,
+          2130,
+          2335
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.430638817311,
+          -36.8323264317504,
+          174.821637359634,
+          -36.4406822370342
+        ],
+        "shape_length_sum_m": 1388.51,
+        "file": "named/lookout-track-b59e8dd9.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Lookout Walk",
+        "feature_count": 1,
+        "objectids": [
+          231
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.089950164266,
+          -37.068322071344,
+          175.090442288169,
+          -37.0668260722097
+        ],
+        "shape_length_sum_m": 184.99,
+        "file": "named/lookout-walk-3e9f612a.geojson"
+      },
+      {
+        "score": 71.0,
+        "trackname": "Upper Lookout Walk",
+        "feature_count": 3,
+        "objectids": [
+          98,
+          1204,
+          1457
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.090005514414,
+          -37.0673246065282,
+          175.092573863893,
+          -37.0658960524782
+        ],
+        "shape_length_sum_m": 597.6,
+        "file": "named/upper-lookout-walk-e96d2245.geojson"
+      }
+    ]
+  },
+  {
+    "row": 8,
+    "sheet_name": "Shakespear Heritage Trail",
+    "location": "Shakespear Regional Park",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Heritage Trail",
+        "feature_count": 10,
+        "objectids": [
+          293,
+          1173,
+          1595,
+          1602,
+          2068,
+          2167,
+          2248,
+          2271,
+          2891,
+          2980
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.812701739173,
+          -36.6071591845652,
+          174.827886032794,
+          -36.6022401030468
+        ],
+        "shape_length_sum_m": 3039.92,
+        "file": "named/heritage-trail-ceac024e.geojson"
+      }
+    ]
+  },
+  {
+    "row": 10,
+    "sheet_name": "Victoria Park Path",
+    "location": "Auckland CBD",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Victoria Reserve Track",
+        "feature_count": 1,
+        "objectids": [
+          7762
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.081601129097,
+          -36.7931570084429,
+          175.084385208032,
+          -36.7922931851241
+        ],
+        "shape_length_sum_m": 333.09,
+        "file": "named/victoria-reserve-track-4df1b795.geojson"
+      }
+    ]
+  },
+  {
+    "row": 11,
+    "sheet_name": "Pukekawa Centennial Glade Path",
+    "location": "Auckland CBD",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Centennial Track",
+        "feature_count": 4,
+        "objectids": [
+          36,
+          443,
+          1148,
+          1670
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.503361285134,
+          -36.9540321729702,
+          174.514352316674,
+          -36.9371694053162
+        ],
+        "shape_length_sum_m": 3119.22,
+        "file": "named/centennial-track-135860ea.geojson"
+      }
+    ]
+  },
+  {
+    "row": 13,
+    "sheet_name": "Albert Park Path",
+    "location": "Auckland CBD",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Albert Cres Walkway",
+        "feature_count": 1,
+        "objectids": [
+          7230
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.042800703934,
+          -36.8033654776912,
+          175.043479240102,
+          -36.8031390546716
+        ],
+        "shape_length_sum_m": 132.09,
+        "file": "named/albert-cres-walkway-9a652202.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Albert Cres to Ostend Rd",
+        "feature_count": 1,
+        "objectids": [
+          11987
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.043484129936,
+          -36.8033012687633,
+          175.052490826428,
+          -36.7961109764313
+        ],
+        "shape_length_sum_m": 1622.1,
+        "file": "named/albert-cres-to-ostend-rd-5f9f5966.geojson"
+      }
+    ]
+  },
+  {
+    "row": 14,
+    "sheet_name": "Albert to Myers Urban Ngahere Path",
+    "location": "Auckland CBD",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Albert Cres Walkway",
+        "feature_count": 1,
+        "objectids": [
+          7230
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.042800703934,
+          -36.8033654776912,
+          175.043479240102,
+          -36.8031390546716
+        ],
+        "shape_length_sum_m": 132.09,
+        "file": "named/albert-cres-walkway-9a652202.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Albert Cres to Ostend Rd",
+        "feature_count": 1,
+        "objectids": [
+          11987
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.043484129936,
+          -36.8033012687633,
+          175.052490826428,
+          -36.7961109764313
+        ],
+        "shape_length_sum_m": 1622.1,
+        "file": "named/albert-cres-to-ostend-rd-5f9f5966.geojson"
+      }
+    ]
+  },
+  {
+    "row": 16,
+    "sheet_name": "Āwhitu Hatton Road Track",
+    "location": "Āwhitu Regional Park",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Hatton Road Walk",
+        "feature_count": 1,
+        "objectids": [
+          390
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.65192268448,
+          -37.0972960725422,
+          174.654864689054,
+          -37.0965660229873
+        ],
+        "shape_length_sum_m": 283.8,
+        "file": "named/hatton-road-walk-0b33c953.geojson"
+      }
+    ]
+  },
+  {
+    "row": 18,
+    "sheet_name": "Manuka Reserve Path",
+    "location": "Bayview",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Manukau Bar View Walk",
+        "feature_count": 1,
+        "objectids": [
+          1324
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.545097552294,
+          -37.0222026964543,
+          174.547014788904,
+          -37.0218385479897
+        ],
+        "shape_length_sum_m": 195.97,
+        "file": "named/manukau-bar-view-walk-1f109e01.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Manukau Timber Co Heritage Walk",
+        "feature_count": 2,
+        "objectids": [
+          62,
+          3139
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.562177817082,
+          -37.0062632363364,
+          174.564614109716,
+          -37.0045705659465
+        ],
+        "shape_length_sum_m": 638.45,
+        "file": "named/manukau-timber-co-heritage-walk-cc8d2e4f.geojson"
+      },
+      {
+        "score": 83.3,
+        "trackname": "Kanuka Track",
+        "feature_count": 2,
+        "objectids": [
+          7833,
+          12156
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.810140485618,
+          -36.6067202952274,
+          174.818846432064,
+          -36.6032422462669
+        ],
+        "shape_length_sum_m": 1148.71,
+        "file": "named/kanuka-track-2db392f8.geojson"
+      }
+    ]
+  },
+  {
+    "row": 23,
+    "sheet_name": "Chelsea Heritage Path",
+    "location": "Birkenhead",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Heritage Trail",
+        "feature_count": 10,
+        "objectids": [
+          293,
+          1173,
+          1595,
+          1602,
+          2068,
+          2167,
+          2248,
+          2271,
+          2891,
+          2980
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.812701739173,
+          -36.6071591845652,
+          174.827886032794,
+          -36.6022401030468
+        ],
+        "shape_length_sum_m": 3039.92,
+        "file": "named/heritage-trail-ceac024e.geojson"
+      }
+    ]
+  },
+  {
+    "row": 25,
+    "sheet_name": "Te Ara o Tiriwa/Gittos Domain Path",
+    "location": "Blockhouse Bay",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Toki Reserve loop",
+        "feature_count": 1,
+        "objectids": [
+          7905
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.041728329459,
+          -36.7938883289206,
+          175.0466232764,
+          -36.7890473484596
+        ],
+        "shape_length_sum_m": 1718.75,
+        "file": "named/te-toki-reserve-loop-39a3e8bd.geojson"
+      }
+    ]
+  },
+  {
+    "row": 30,
+    "sheet_name": "Musick Point Path",
+    "location": "Bucklands Beach",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      },
+      {
+        "score": 69.6,
+        "trackname": "Kauri Point Track",
+        "feature_count": 4,
+        "objectids": [
+          1429,
+          1510,
+          2325,
+          2394
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.36636375644,
+          -36.3249188257362,
+          174.375314037232,
+          -36.3141556027593
+        ],
+        "shape_length_sum_m": 3198.65,
+        "file": "named/kauri-point-track-49a965b5.geojson"
+      }
+    ]
+  },
+  {
+    "row": 33,
+    "sheet_name": "Centennial Park Nature Path",
+    "location": "Campbells Bay",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Centennial Track",
+        "feature_count": 4,
+        "objectids": [
+          36,
+          443,
+          1148,
+          1670
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.503361285134,
+          -36.9540321729702,
+          174.514352316674,
+          -36.9371694053162
+        ],
+        "shape_length_sum_m": 3119.22,
+        "file": "named/centennial-track-135860ea.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Nature Trail",
+        "feature_count": 1,
+        "objectids": [
+          12356
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.743868025412,
+          -36.6804924208604,
+          174.7462589909,
+          -36.679875613943
+        ],
+        "shape_length_sum_m": 260.79,
+        "file": "named/nature-trail-994949ae.geojson"
+      }
+    ]
+  },
+  {
+    "row": 34,
+    "sheet_name": "Centennial Park Path",
+    "location": "Campbells Bay",
+    "candidates": [
+      {
+        "score": 100.0,
+        "trackname": "Centennial Track",
+        "feature_count": 4,
+        "objectids": [
+          36,
+          443,
+          1148,
+          1670
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.503361285134,
+          -36.9540321729702,
+          174.514352316674,
+          -36.9371694053162
+        ],
+        "shape_length_sum_m": 3119.22,
+        "file": "named/centennial-track-135860ea.geojson"
+      },
+      {
+        "score": 70.6,
+        "trackname": "Central Track",
+        "feature_count": 1,
+        "objectids": [
+          413
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.076423347099,
+          -36.8229099420193,
+          175.084861431409,
+          -36.8174778164916
+        ],
+        "shape_length_sum_m": 1268.5,
+        "file": "named/central-track-c1d0865e.geojson"
+      }
+    ]
+  },
+  {
+    "row": 36,
+    "sheet_name": "Kauri Point Domain Path",
+    "location": "Chatswood",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Kauri Point Track",
+        "feature_count": 4,
+        "objectids": [
+          1429,
+          1510,
+          2325,
+          2394
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.36636375644,
+          -36.3249188257362,
+          174.375314037232,
+          -36.3141556027593
+        ],
+        "shape_length_sum_m": 3198.65,
+        "file": "named/kauri-point-track-49a965b5.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Kauri Grove Track",
+        "feature_count": 5,
+        "objectids": [
+          423,
+          1119,
+          1653,
+          12192,
+          12236
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.490522685922,
+          -36.9670849588454,
+          174.514911845375,
+          -36.9606418589098
+        ],
+        "shape_length_sum_m": 3475.63,
+        "file": "named/kauri-grove-track-e7750785.geojson"
+      }
+    ]
+  },
+  {
+    "row": 37,
+    "sheet_name": "Kauri Point Centennial Path",
+    "location": "Chatswood",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Centennial Track",
+        "feature_count": 4,
+        "objectids": [
+          36,
+          443,
+          1148,
+          1670
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.503361285134,
+          -36.9540321729702,
+          174.514352316674,
+          -36.9371694053162
+        ],
+        "shape_length_sum_m": 3119.22,
+        "file": "named/centennial-track-135860ea.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Kauri Point Track",
+        "feature_count": 4,
+        "objectids": [
+          1429,
+          1510,
+          2325,
+          2394
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.36636375644,
+          -36.3249188257362,
+          174.375314037232,
+          -36.3141556027593
+        ],
+        "shape_length_sum_m": 3198.65,
+        "file": "named/kauri-point-track-49a965b5.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Kauri Grove Track",
+        "feature_count": 5,
+        "objectids": [
+          423,
+          1119,
+          1653,
+          12192,
+          12236
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.490522685922,
+          -36.9670849588454,
+          174.514911845375,
+          -36.9606418589098
+        ],
+        "shape_length_sum_m": 3475.63,
+        "file": "named/kauri-grove-track-e7750785.geojson"
+      }
+    ]
+  },
+  {
+    "row": 38,
+    "sheet_name": "Puriri Track (Clevedon Scenic Reserve)",
+    "location": "Clevedon",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Puriri Ridge Track",
+        "feature_count": 3,
+        "objectids": [
+          12237,
+          12243,
+          12249
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.529183053832,
+          -37.0271639797529,
+          174.537173969806,
+          -37.0139916685338
+        ],
+        "shape_length_sum_m": 1911.31,
+        "file": "named/puriri-ridge-track-5f4553b3.geojson"
+      }
+    ]
+  },
+  {
+    "row": 39,
+    "sheet_name": "Duder Duck Bay Track",
+    "location": "Duder Regional Park",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Duder Coastal Walk",
+        "feature_count": 2,
+        "objectids": [
+          591,
+          2077
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.070671691308,
+          -36.9053092658154,
+          175.079544264167,
+          -36.9031136158503
+        ],
+        "shape_length_sum_m": 958.05,
+        "file": "named/duder-coastal-walk-e08f100a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 41,
+    "sheet_name": "Duder Farm Loop Track",
+    "location": "Duder Regional Park",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Duder Coastal Walk",
+        "feature_count": 2,
+        "objectids": [
+          591,
+          2077
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.070671691308,
+          -36.9053092658154,
+          175.079544264167,
+          -36.9031136158503
+        ],
+        "shape_length_sum_m": 958.05,
+        "file": "named/duder-coastal-walk-e08f100a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 42,
+    "sheet_name": "Duder Sustainable Trail",
+    "location": "Duder Regional Park",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Sustainable Track",
+        "feature_count": 1,
+        "objectids": [
+          2338
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.082548754946,
+          -36.9078204310235,
+          175.082880041818,
+          -36.9077356434507
+        ],
+        "shape_length_sum_m": 31.63,
+        "file": "named/sustainable-track-c231734c.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Duder Coastal Walk",
+        "feature_count": 2,
+        "objectids": [
+          591,
+          2077
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.070671691308,
+          -36.9053092658154,
+          175.079544264167,
+          -36.9031136158503
+        ],
+        "shape_length_sum_m": 958.05,
+        "file": "named/duder-coastal-walk-e08f100a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 49,
+    "sheet_name": "Takarunga/Mt Victoria Path",
+    "location": "Devonport",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Victoria Reserve Track",
+        "feature_count": 1,
+        "objectids": [
+          7762
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.081601129097,
+          -36.7931570084429,
+          175.084385208032,
+          -36.7922931851241
+        ],
+        "shape_length_sum_m": 333.09,
+        "file": "named/victoria-reserve-track-4df1b795.geojson"
+      }
+    ]
+  },
+  {
+    "row": 50,
+    "sheet_name": "Maungauika/North Head Historic Walk",
+    "location": "Devonport",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Historic Loop Track",
+        "feature_count": 1,
+        "objectids": [
+          3188
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.25333981709,
+          -36.9751052938089,
+          175.255353427322,
+          -36.9740074198403
+        ],
+        "shape_length_sum_m": 332.21,
+        "file": "named/historic-loop-track-bc1e14c2.geojson"
+      }
+    ]
+  },
+  {
+    "row": 51,
+    "sheet_name": "Waterfall Track",
+    "location": "Dome Valley",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Karamatura Waterfall Walk",
+        "feature_count": 1,
+        "objectids": [
+          12263
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.543952586909,
+          -37.0003108787581,
+          174.545290065755,
+          -36.9993081437194
+        ],
+        "shape_length_sum_m": 164.21,
+        "file": "named/karamatura-waterfall-walk-513b40c4.geojson"
+      }
+    ]
+  },
+  {
+    "row": 52,
+    "sheet_name": "Dome Forest carpark to lookout",
+    "location": "Dome Valley",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Lookout Track",
+        "feature_count": 7,
+        "objectids": [
+          73,
+          130,
+          1521,
+          1724,
+          1941,
+          2130,
+          2335
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.430638817311,
+          -36.8323264317504,
+          174.821637359634,
+          -36.4406822370342
+        ],
+        "shape_length_sum_m": 1388.51,
+        "file": "named/lookout-track-b59e8dd9.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Lookout Walk",
+        "feature_count": 1,
+        "objectids": [
+          231
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.089950164266,
+          -37.068322071344,
+          175.090442288169,
+          -37.0668260722097
+        ],
+        "shape_length_sum_m": 184.99,
+        "file": "named/lookout-walk-3e9f612a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 56,
+    "sheet_name": "Mt Tamahunga Walkway",
+    "location": "Dome Valley",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Mt Donald McLean Walk",
+        "feature_count": 1,
+        "objectids": [
+          12226
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.538110118747,
+          -37.0160397393224,
+          174.54074643874,
+          -37.0143212233824
+        ],
+        "shape_length_sum_m": 518.78,
+        "file": "named/mt-donald-mclean-walk-89baebcf.geojson"
+      }
+    ]
+  },
+  {
+    "row": 58,
+    "sheet_name": "Point View Bush Path",
+    "location": "East Tamaki",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      }
+    ]
+  },
+  {
+    "row": 61,
+    "sheet_name": "Mangemangeroa Kowhai Path",
+    "location": "East Tamaki Heights",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Kowhai Track",
+        "feature_count": 2,
+        "objectids": [
+          1066,
+          2635
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.070953956832,
+          -36.9077356434507,
+          175.083888185288,
+          -36.814141253919
+        ],
+        "shape_length_sum_m": 956.0,
+        "file": "named/kowhai-track-4aa854aa.geojson"
+      }
+    ]
+  },
+  {
+    "row": 68,
+    "sheet_name": "Cornwall Park Heritage Path",
+    "location": "Epsom",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Heritage Trail",
+        "feature_count": 10,
+        "objectids": [
+          293,
+          1173,
+          1595,
+          1602,
+          2068,
+          2167,
+          2248,
+          2271,
+          2891,
+          2980
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.812701739173,
+          -36.6071591845652,
+          174.827886032794,
+          -36.6022401030468
+        ],
+        "shape_length_sum_m": 3039.92,
+        "file": "named/heritage-trail-ceac024e.geojson"
+      }
+    ]
+  },
+  {
+    "row": 69,
+    "sheet_name": "Te Kopuke/Titikopuke/Mt St John Path",
+    "location": "Epsom",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Toki Reserve loop",
+        "feature_count": 1,
+        "objectids": [
+          7905
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.041728329459,
+          -36.7938883289206,
+          175.0466232764,
+          -36.7890473484596
+        ],
+        "shape_length_sum_m": 1718.75,
+        "file": "named/te-toki-reserve-loop-39a3e8bd.geojson"
+      }
+    ]
+  },
+  {
+    "row": 71,
+    "sheet_name": "Point View Loop Path",
+    "location": "Flat Bush",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      }
+    ]
+  },
+  {
+    "row": 72,
+    "sheet_name": "Flat Bush Path",
+    "location": "Flat Bush",
+    "candidates": [
+      {
+        "score": 73.7,
+        "trackname": "Clark Bush Track",
+        "feature_count": 3,
+        "objectids": [
+          71,
+          1277,
+          2858
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.641980327373,
+          -36.9438479485405,
+          174.646599315512,
+          -36.9381156887788
+        ],
+        "shape_length_sum_m": 1878.96,
+        "file": "named/clark-bush-track-55904133.geojson"
+      }
+    ]
+  },
+  {
+    "row": 73,
+    "sheet_name": "Point View Lookout Path",
+    "location": "Flat Bush",
+    "candidates": [
+      {
+        "score": 100,
+        "trackname": "Lookout Track",
+        "feature_count": 7,
+        "objectids": [
+          73,
+          130,
+          1521,
+          1724,
+          1941,
+          2130,
+          2335
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.430638817311,
+          -36.8323264317504,
+          174.821637359634,
+          -36.4406822370342
+        ],
+        "shape_length_sum_m": 1388.51,
+        "file": "named/lookout-track-b59e8dd9.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Lookout Walk",
+        "feature_count": 1,
+        "objectids": [
+          231
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.089950164266,
+          -37.068322071344,
+          175.090442288169,
+          -37.0668260722097
+        ],
+        "shape_length_sum_m": 184.99,
+        "file": "named/lookout-walk-3e9f612a.geojson"
+      },
+      {
+        "score": 100,
+        "trackname": "Park Point Walkway",
+        "feature_count": 1,
+        "objectids": [
+          4278
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.987863223948,
+          -36.8123538475663,
+          174.99726431597,
+          -36.7956817851804
+        ],
+        "shape_length_sum_m": 4093.7,
+        "file": "named/park-point-walkway-f13a7260.geojson"
+      },
+      {
+        "score": 72.2,
+        "trackname": "Huia Point Lookout",
+        "feature_count": 1,
+        "objectids": [
+          2663
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.574800991458,
+          -37.0096188102836,
+          174.575113269922,
+          -37.0094199023514
+        ],
+        "shape_length_sum_m": 36.07,
+        "file": "named/huia-point-lookout-46691188.geojson"
+      },
+      {
+        "score": 68.4,
+        "trackname": "Tokatu Point Lookout Track",
+        "feature_count": 3,
+        "objectids": [
+          328,
+          934,
+          1075
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.858419377931,
+          -36.3692179203516,
+          174.864508998435,
+          -36.3640684974711
+        ],
+        "shape_length_sum_m": 838.44,
+        "file": "named/tokatu-point-lookout-track-60192a0a.geojson"
+      }
+    ]
+  },
+  {
+    "row": 74,
+    "sheet_name": "Parrs Park Path",
+    "location": "Glen Eden",
+    "candidates": [
+      {
+        "score": 72.7,
+        "trackname": "Parker Track",
+        "feature_count": 1,
+        "objectids": [
+          12235
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.606805928371,
+          -36.9446342873441,
+          174.608047530717,
+          -36.9424302212465
+        ],
+        "shape_length_sum_m": 283.22,
+        "file": "named/parker-track-a1c7554d.geojson"
+      }
+    ]
+  },
+  {
+    "row": 75,
+    "sheet_name": "Te Ara Hono/Glen Eden to Kaurilands Path",
+    "location": "Glen Eden",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Toki Reserve loop",
+        "feature_count": 1,
+        "objectids": [
+          7905
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.041728329459,
+          -36.7938883289206,
+          175.0466232764,
+          -36.7890473484596
+        ],
+        "shape_length_sum_m": 1718.75,
+        "file": "named/te-toki-reserve-loop-39a3e8bd.geojson"
+      }
+    ]
+  },
+  {
+    "row": 81,
+    "sheet_name": "Goat Island Walkway",
+    "location": "Goat Island",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Goat Hill Track",
+        "feature_count": 1,
+        "objectids": [
+          1297
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.558516509028,
+          -36.9947386038861,
+          174.560043026567,
+          -36.9927462459177
+        ],
+        "shape_length_sum_m": 355.95,
+        "file": "named/goat-hill-track-cd210742.geojson"
+      }
+    ]
+  },
+  {
+    "row": 92,
+    "sheet_name": "Station Rock Path",
+    "location": "Great Barrier Island",
+    "candidates": [
+      {
+        "score": 76.2,
+        "trackname": "Lion Rock Track",
+        "feature_count": 1,
+        "objectids": [
+          395
+        ],
+        "statuses": [
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.466571738996,
+          -36.9537316749327,
+          174.467655569801,
+          -36.9534700489604
+        ],
+        "shape_length_sum_m": 150.5,
+        "file": "named/lion-rock-track-a30272a9.geojson"
+      }
+    ]
+  },
+  {
+    "row": 96,
+    "sheet_name": "Old Lady Track",
+    "location": "Great Barrier Island",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Old Coach Road",
+        "feature_count": 3,
+        "objectids": [
+          710,
+          2964,
+          12800
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.545154795977,
+          -36.9155036369408,
+          174.559434524405,
+          -36.9069895892907
+        ],
+        "shape_length_sum_m": 2182.46,
+        "file": "named/old-coach-road-de683b07.geojson"
+      }
+    ]
+  },
+  {
+    "row": 97,
+    "sheet_name": "Old Mill Track",
+    "location": "Great Barrier Island",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Old Coach Road",
+        "feature_count": 3,
+        "objectids": [
+          710,
+          2964,
+          12800
+        ],
+        "statuses": [
+          "Open",
+          "Temp Closed"
+        ],
+        "bbox_wgs84": [
+          174.545154795977,
+          -36.9155036369408,
+          174.559434524405,
+          -36.9069895892907
+        ],
+        "shape_length_sum_m": 2182.46,
+        "file": "named/old-coach-road-de683b07.geojson"
+      }
+    ]
+  },
+  {
+    "row": 100,
+    "sheet_name": "Bush's Beach Track",
+    "location": "Great Barrier Island",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Bush Walk",
+        "feature_count": 2,
+        "objectids": [
+          2219,
+          2907
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.283289940195,
+          -37.0414827698091,
+          175.290253695659,
+          -37.0393990854962
+        ],
+        "shape_length_sum_m": 1192.14,
+        "file": "named/bush-walk-fba8145b.geojson"
+      }
+    ]
+  },
+  {
+    "row": 102,
+    "sheet_name": "Te Ahumata Track",
+    "location": "Great Barrier Island",
+    "candidates": [
+      {
+        "score": 85.0,
+        "trackname": "Te Ahuahu Road",
+        "feature_count": 1,
+        "objectids": [
+          3239
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          174.474498250663,
+          -36.9698577012823,
+          174.478604087993,
+          -36.9669080201955
+        ],
+        "shape_length_sum_m": 491.32,
+        "file": "named/te-ahuahu-road-a9079582.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Aroha Ave Track",
+        "feature_count": 1,
+        "objectids": [
+          12533
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.027447182866,
+          -36.7831656754836,
+          175.033504793514,
+          -36.7817713150396
+        ],
+        "shape_length_sum_m": 636.22,
+        "file": "named/te-aroha-ave-track-f75fcdbb.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Awaawa O Makoha",
+        "feature_count": 1,
+        "objectids": [
+          12146
+        ],
+        "statuses": [],
+        "bbox_wgs84": [
+          175.004417299958,
+          -36.7771202852074,
+          175.006769126017,
+          -36.7748849944569
+        ],
+        "shape_length_sum_m": 591.17,
+        "file": "named/te-awaawa-o-makoha-6bd171cd.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Matuku Bay Esp Res DOC Section",
+        "feature_count": 1,
+        "objectids": [
+          11978
+        ],
+        "statuses": [
+          "Closed Dieback"
+        ],
+        "bbox_wgs84": [
+          175.132061962459,
+          -36.8406230208735,
+          175.144134262747,
+          -36.8323917908655
+        ],
+        "shape_length_sum_m": 3095.16,
+        "file": "named/te-matuku-bay-esp-res-doc-section-8f2e5755.geojson"
+      },
+      {
+        "score": 85.0,
+        "trackname": "Te Toki Reserve loop",
+        "feature_count": 1,
+        "objectids": [
+          7905
+        ],
+        "statuses": [
+          "Open"
+        ],
+        "bbox_wgs84": [
+          175.041728329459,
+          -36.7938883289206,
+          175.0466232764,
+          -36.7890473484596
+        ],
+        "shape_length_sum_m": 1718.75,
+        "file": "named/te-toki-reserve-loop-39a3e8bd.geojson"
+      }
+    ]
+  }
+]
