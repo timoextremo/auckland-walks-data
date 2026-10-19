@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LINZ primary-parcel overlay against the repository's unnamed walking-route KML files; accepts caller-selected seven-row audit batches (including rows 938-958).
+"""LINZ primary-parcel overlay against the repository's unnamed walking-route KML files; accepts caller-selected seven-row audit batches.
 Uses the public LINZ ArcGIS mirror (same source layer as the user's GeoPackage).
 This reports parcel intent and descriptions, NOT legal ownership or a public-access right.
 """
