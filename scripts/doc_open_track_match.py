@@ -60,6 +60,12 @@ def fetch_doc_tracks(route):
     all_features = []
     session = requests.Session()
     session.headers["User-Agent"] = "auckland-walks-doc-kml-match/1.0 (read-only)"
+    count_response = session.get(SERVICE + "/query", params={"where": "1=1", "returnCountOnly": "true", "f": "json"}, timeout=30)
+    count_response.raise_for_status()
+    global_count = count_response.json().get("count")
+    if not isinstance(global_count, int) or global_count <= 0:
+        raise RuntimeError(f"DOC source health check failed: {count_response.text[:250]}")
+    print(f"DOC published dataset healthy: {global_count} total route features", flush=True)
     while True:
         for attempt in range(4):
             try:
