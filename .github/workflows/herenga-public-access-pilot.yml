@@ -16,12 +16,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: "811-818"
-            rows: "811,812,813,814,815,816,818"
-          - name: "819-825"
-            rows: "819,820,821,822,823,824,825"
-          - name: "826-832"
-            rows: "826,827,828,829,830,831,832"
+          - name: "833-839"
+            rows: "833,834,835,836,837,838,839"
+          - name: "840-846"
+            rows: "840,841,842,843,844,845,846"
+          - name: "847-853"
+            rows: "847,848,849,850,851,852,853"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
