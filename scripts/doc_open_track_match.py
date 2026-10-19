@@ -16,8 +16,8 @@ from pyproj import Transformer
 from shapely.geometry import LineString
 from shapely.ops import transform, unary_union
 
-SERVICE = "https://mapserver.doc.govt.nz/arcgis/rest/services/DOCMaps/DOCMaps/MapServer/4"
-FIELDS = "OBJECTID,DESCRIPTION,STATUS,CATEGORY_DESCRIPTION,OBJECT_TYPE_DESCRIPTION"
+SERVICE = "https://services1.arcgis.com/3JjYDyG3oajxU6HO/arcgis/rest/services/DOC_Walking_Experiences/FeatureServer/1"
+FIELDS = "OBJECTID,name,introduction,difficulty,hasAlerts,walkingAndTrampingWebPage,dateLoadedToGIS"
 REPO_DIR = pathlib.Path("map-data/auckland-walks/clusters")
 TO_NZTM = Transformer.from_crs("EPSG:4326", "EPSG:2193", always_xy=True).transform
 
@@ -108,10 +108,10 @@ def match(row):
             props = feat.get("attributes", {})
             near_features.append({
                 "OBJECTID": props.get("OBJECTID"),
-                "name": props.get("DESCRIPTION"),
-                "status": props.get("STATUS"),
-                "category": props.get("CATEGORY_DESCRIPTION"),
-                "type": props.get("OBJECT_TYPE_DESCRIPTION"),
+                "name": props.get("name"),
+                "alerts_reported": props.get("hasAlerts"),
+                "difficulty": props.get("difficulty"),
+                "introduction": props.get("introduction"), "webpage": props.get("walkingAndTrampingWebPage"), "loaded": props.get("dateLoadedToGIS"),
                 "nearest_m": round(distance, 1),
                 "match_within_20m_m": round(route.intersection(geom.buffer(20)).length, 1),
             })
@@ -127,7 +127,7 @@ def match(row):
     near_features.sort(key=lambda x: (-x["match_within_20m_m"], x["nearest_m"]))
     return {
         "Sheet1_row": row, "source_kml": kml, "historic_route_m": round(length, 1),
-        "doc_layer": SERVICE, "source_description": "DOC managed track centrelines (closed tracks not shown)",
+        "doc_layer": SERVICE, "source_description": "DOC published walking experience route lines; check current webpage closures; source may lag",
         "queried_utc": datetime.now(timezone.utc).isoformat(),
         "total_doc_features_in_envelope": len(feats), "doc_nearest_m": closest,
         **ratios, "nearby_doc_features": near_features[:20],
