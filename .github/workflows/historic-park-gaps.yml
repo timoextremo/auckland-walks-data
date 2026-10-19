@@ -1,0 +1,38 @@
+name: Seven priority park historic geometry gaps
+on:
+  pull_request:
+    paths:
+      - 'scripts/historic_park_gaps.py'
+      - '.github/workflows/historic-park-gaps.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gap-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "city"
+            rows: "816,820"
+          - name: "north-east"
+            rows: "851,925"
+          - name: "southeast"
+            rows: "926,931,932"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install spatial dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Identify unmapped sections and conditional path tags
+        run: python scripts/historic_park_gaps.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "historic-park-gaps-${{ matrix.name }}"
+          path: park_gap_*.json
+          if-no-files-found: ignore
