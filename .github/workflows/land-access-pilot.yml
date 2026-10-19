@@ -12,6 +12,16 @@ jobs:
   intersect:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "833-839"
+            rows: "833,834,835,836,837,838,839"
+          - name: "840-846"
+            rows: "840,841,842,843,844,845,846"
+          - name: "847-853"
+            rows: "847,848,849,850,851,852,853"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -20,10 +30,10 @@ jobs:
       - name: Install public GIS dependencies
         run: python -m pip install --quiet shapely>=2.0 pyproj>=3.5 requests>=2.31
       - name: Intersect first 21 route geometries with LINZ public primary parcels
-        run: python scripts/land_access_primary_parcels.py
+        run: python scripts/land_access_primary_parcels.py --rows "${{ matrix.rows }}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: primary-parcel-pilot-json
+          name: "primary-parcel-${{ matrix.name }}"
           path: primary_parcel_pilot.json
           if-no-files-found: ignore
