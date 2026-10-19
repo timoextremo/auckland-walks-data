@@ -1,0 +1,38 @@
+name: OSM volunteered footpath corroboration
+on:
+  pull_request:
+    paths:
+      - 'scripts/osm_path_corroboration.py'
+      - '.github/workflows/osm-path-corroboration.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  corroborate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "rural-north"
+            rows: "1320,1022,1025"
+          - name: "islands"
+            rows: "994,1196,1354"
+          - name: "parks"
+            rows: "1457,1023,1362"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install spatial packages
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Spatial corroboration only of old track geometry against OSM footpaths
+        run: python scripts/osm_path_corroboration.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "osm-corroboration-${{ matrix.name }}"
+          path: osm_path_*.json
+          if-no-files-found: ignore
