@@ -16,12 +16,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: "896-902"
-            rows: "896,897,898,899,900,901,902"
-          - name: "903-909"
-            rows: "903,904,905,906,907,908,909"
-          - name: "910-916"
-            rows: "910,911,912,913,914,915,916"
+          - name: "917-923"
+            rows: "917,918,919,920,921,922,923"
+          - name: "924-930"
+            rows: "924,925,926,927,928,929,930"
+          - name: "931-937"
+            rows: "931,932,933,934,935,936,937"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
