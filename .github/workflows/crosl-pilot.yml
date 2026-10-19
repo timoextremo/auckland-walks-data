@@ -1,0 +1,39 @@
+name: CRoSL state land overlap pilot
+on:
+  pull_request:
+    paths:
+      - 'scripts/land_access_crosl_pilot.py'
+      - 'scripts/land_access_primary_parcels.py'
+      - '.github/workflows/crosl-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  crosl-overlap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "811-818"
+            rows: "811,812,813,814,815,816,818"
+          - name: "819-825"
+            rows: "819,820,821,822,823,824,825"
+          - name: "826-832"
+            rows: "826,827,828,829,830,831,832"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install GIS dependencies
+        run: python -m pip install --quiet shapely>=2.0 pyproj>=3.5 requests>=2.31
+      - name: Intersect CRoSL polygons against LINZ walking tracks
+        run: python scripts/land_access_crosl_pilot.py --rows "${{ matrix.rows }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "crosl-${{ matrix.name }}"
+          path: crosl-batch-*.json
+          if-no-files-found: ignore
