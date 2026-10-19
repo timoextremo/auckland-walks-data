@@ -65,7 +65,18 @@ def fetch_doc_tracks(route):
     global_count = count_response.json().get("count")
     if not isinstance(global_count, int) or global_count <= 0:
         raise RuntimeError(f"DOC source health check failed: {count_response.text[:250]}")
-    print(f"DOC published dataset healthy: {global_count} total route features", flush=True)
+    # Spatial-filter positive control: an envelope covering New Zealand must
+    # return some tracks, otherwise all per-track zeros are untrustworthy.
+    spatial_control = session.get(SERVICE + "/query", params={
+        "where": "1=1", "geometry": "1100000,4700000,2500000,6300000",
+        "geometryType": "esriGeometryEnvelope", "inSR": 2193,
+        "spatialRel": "esriSpatialRelIntersects",
+        "returnCountOnly": "true", "f": "json"}, timeout=30)
+    spatial_control.raise_for_status()
+    spatial_count = spatial_control.json().get("count")
+    if not isinstance(spatial_count, int) or spatial_count <= 0:
+        raise RuntimeError(f"ArcGIS spatial-filter positive control failed: {spatial_control.text[:250]}")
+    print(f"DOC dataset control: {global_count} total routes, {spatial_count} matched across NZ", flush=True)
     while True:
         for attempt in range(4):
             try:
