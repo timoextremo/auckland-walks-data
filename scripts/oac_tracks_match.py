@@ -36,11 +36,13 @@ def resolve():
     for base in SOURCES:
         try:
             data=get_json(base,{"f":"json"})
-            ids={layer["id"]:layer["name"] for layer in data.get("layers",[])}
-            missing=[i for i in LAYERS if i not in ids]
-            if missing:raise RuntimeError(f"Missing layer IDs {missing}")
+            ids={layer["name"].strip().casefold():layer["id"] for layer in data.get("layers",[])}
+            labels=["Walking","Shared Use","Te Araroa"]
+            missing=[label for label in labels if label.casefold() not in ids]
+            if missing:raise RuntimeError(f"Missing layer names {missing}; service has {list(ids.items())}")
+            actual_layers={ids[label.casefold()]:label for label in labels}
             metadata={}
-            for id,label in LAYERS.items():
+            for id,label in actual_layers.items():
                 layer=get_json(f"{base}/{id}",{"f":"json"})
                 if layer.get("geometryType")!="esriGeometryPolyline":
                     raise RuntimeError(f"Layer {id} not polyline")
@@ -50,6 +52,8 @@ def resolve():
                                  "extent":layer.get("extent")}
             findings.append({"service":base,"ok":True,"layers":metadata})
             if any(d["global_count"]>0 for d in metadata.values()):
+                LAYERS.clear()
+                LAYERS.update(actual_layers)
                 return base,metadata,findings
         except Exception as e:
             findings.append({"service":base,"ok":False,"error":str(e)})
