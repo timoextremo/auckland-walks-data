@@ -1,0 +1,68 @@
+name: Modern footway vs historical access corridor - 40 urban tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-footway-corridors-b1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  known-link-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Validate control against Kerria Place to Sunset Road known pedestrian link
+        run: python scripts/modern_footway_access_corridor.py --rows "1125" --name kerria-control
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: footway-control-kerria
+          path: corridor_kerria-control.json
+          if-no-files-found: warn
+  corridor-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "corridor-1"
+            rows: "1091,950,1086,1112"
+          - name: "corridor-2"
+            rows: "1256,1269,910,1114"
+          - name: "corridor-3"
+            rows: "965,1267,1407,974"
+          - name: "corridor-4"
+            rows: "1281,1402,1300,865"
+          - name: "corridor-5"
+            rows: "897,1168,1386,1276"
+          - name: "corridor-6"
+            rows: "902,1390,967,900"
+          - name: "corridor-7"
+            rows: "1160,1408,1375,1271"
+          - name: "corridor-8"
+            rows: "1464,1152,1268,1119"
+          - name: "corridor-9"
+            rows: "1455,1284,1290,1262"
+          - name: "corridor-10"
+            rows: "1456,1122,1109,1124"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Read-only modern OSM footway and WAMS legal-corridor geometry compare
+        run: python scripts/modern_footway_access_corridor.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "footway-corridor-${{ matrix.name }}"
+          path: corridor_*.json
+          if-no-files-found: warn
