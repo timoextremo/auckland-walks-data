@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/access-triage-pass2.yml'
+      - 'scripts/wams_exact_gap_segments.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,7 +18,7 @@ jobs:
           python-version: '3.11'
       - name: Install GIS dependencies
         run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
-      - name: Decompose nine unresolved WAMS gaps into exact geometry with matching parcel context
+      - name: Decompose nine WAMS gaps with polygon-space consistency check and parcel context
         run: python scripts/wams_exact_gap_segments.py --rows "858,1272,1248,875,915,1161,879,1298,1125" --name pilot-nine
       - uses: actions/upload-artifact@v4
         if: always()
