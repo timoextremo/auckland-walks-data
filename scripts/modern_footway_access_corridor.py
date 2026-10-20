@@ -75,6 +75,24 @@ def run_row(row):
     modern_yes=round(100*modern_covered/modern_all,1) if modern_all>0 else None
     overlap=round(100*nearby_old/old.length,1)
     shift=round(modern_yes-historical_yes,1) if modern_yes is not None else None
+    # Segment-level check: the neighbouring network can include multiple
+    # branches, obscuring an unmapped gap in the principal historical corridor.
+    # Score individual eligible modern ways separately, preserving splits.
+    segment_checks=[]
+    for segment,item in usable:
+        if segment.length<1:continue
+        single_way_old_overlap_pct=round(100*old.intersection(segment.buffer(10)).length/old.length,1)
+        single_way_wams_pct=round(100*segment.intersection(area).length/segment.length,1) if area else 0.0
+        segment_checks.append({
+          "way":item["way"],"name":item.get("name"),"highway":item.get("highway"),
+          "segment_m":round(segment.length,1),
+          "old_near_this_way_10m_pct":single_way_old_overlap_pct,
+          "way_wams_mapped_yes_pct":single_way_wams_pct,
+          "strict_primary_correspondence":bool(single_way_old_overlap_pct>=75 and
+                   single_way_wams_pct>=90 and segment.length>=old.length*.5)})
+    segment_checks.sort(key=lambda q:(-q["old_near_this_way_10m_pct"],
+                                      -q["way_wams_mapped_yes_pct"],-q["segment_m"]))
+    principal_correspondence=any(x["strict_primary_correspondence"] for x in segment_checks)
     # CORRIDOR_CANDIDATE is a geometric clue, not a legality classification.
     candidate=bool(modern_all>5 and overlap>=85 and modern_yes is not None and
                    modern_yes>=90 and (modern_yes-historical_yes)>=20)
@@ -85,6 +103,8 @@ def run_row(row):
       "modern_path_wams_yes_pct":modern_yes,
       "difference_pct_points":shift,
       "potential_cadastral_centreline_offset":candidate,
+      "strict_primary_way_wams_candidate":principal_correspondence,
+      "principal_way_checks":segment_checks[:12],
       "modern_way_examples":[r for g,r in usable][:12],
       "excluded_way_examples":ignored[:8],
       "wams_nearby_by_layer":layers,
