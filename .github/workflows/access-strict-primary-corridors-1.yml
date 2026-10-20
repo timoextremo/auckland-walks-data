@@ -1,0 +1,58 @@
+name: Strict pedestrian corridor test - first forty offset leads
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-strict-primary-corridors-1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kerria-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Independent way-level test against known Kerria Place accessway
+        run: python scripts/modern_footway_access_corridor.py --rows "1125" --name strict-kerria-control
+  strict-correspondence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - name: "strict-geometry-1"
+            rows: "1168,1160,1290,1262,1122"
+          - name: "strict-geometry-2"
+            rows: "1109,1293,1116,1136,1137"
+          - name: "strict-geometry-3"
+            rows: "1166,1108,1119,1455,1118"
+          - name: "strict-geometry-4"
+            rows: "1454,1256,965,974,1281"
+          - name: "strict-geometry-5"
+            rows: "865,897,967,900,1152"
+          - name: "strict-geometry-6"
+            rows: "1284,979,1456,881,978"
+          - name: "strict-geometry-7"
+            rows: "1275,971,1132,904,889"
+          - name: "strict-geometry-8"
+            rows: "1404,1123,890,1139,1018"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Compare actual individual modern way segments with historical LINZ and WAMS
+        run: python scripts/modern_footway_access_corridor.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "strict-footway-${{ matrix.name }}"
+          path: corridor_*.json
+          if-no-files-found: warn
