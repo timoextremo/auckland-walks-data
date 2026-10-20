@@ -1,0 +1,62 @@
+name: Batch 5 final high-WAMS Auckland tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch5.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - name: "fifth-1"
+            rows: "1378,1379,1380"
+          - name: "fifth-2"
+            rows: "1381,1382,1383"
+          - name: "fifth-3"
+            rows: "1384,1415,1416"
+          - name: "fifth-4"
+            rows: "1417,1420,1421"
+          - name: "fifth-5"
+            rows: "1422,1425,1431"
+          - name: "fifth-6"
+            rows: "1436,1437,1441"
+          - name: "fifth-7"
+            rows: "1444,1445,1459"
+          - name: "fifth-8"
+            rows: "1460,1463,1466"
+          - name: "fifth-9"
+            rows: "1469,1472,1474"
+          - name: "fifth-10"
+            rows: "1476,1478,1484"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install geospatial dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Herenga a Nuku Auckland tracks (production)
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official DOC published walking experience
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Te Araroa official 2026-27 GPS
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Independent volunteer path geometry and named path clues
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch5-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore
