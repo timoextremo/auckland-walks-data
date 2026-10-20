@@ -1,0 +1,42 @@
+name: Modern footway access screening - final twenty in high OSM cohort
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-footway-corridors-b3.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "corridor-b3-1"
+            rows: "1108,868,1153,1352"
+          - name: "corridor-b3-2"
+            rows: "973,870,1127,1180"
+          - name: "corridor-b3-3"
+            rows: "1346,872,878,966"
+          - name: "corridor-b3-4"
+            rows: "1401,862,1106,1247"
+          - name: "corridor-b3-5"
+            rows: "876,979,1293,1116"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only geo dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Compare modern pedestrian mapping with historical LINZ and WAMS geometry
+        run: python scripts/modern_footway_access_corridor.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "modern-footway-${{ matrix.name }}"
+          path: corridor_*.json
+          if-no-files-found: warn
