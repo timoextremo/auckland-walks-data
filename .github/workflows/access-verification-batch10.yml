@@ -1,0 +1,64 @@
+name: Batch 10 first forty short LINZ walking tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch10.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "short10-1"
+            rows: "857,1006,1068,1069"
+          - name: "short10-2"
+            rows: "1070,859,997,1074"
+          - name: "short10-3"
+            rows: "1075,1013,1439,1076"
+          - name: "short10-4"
+            rows: "1077,951,1385,1443"
+          - name: "short10-5"
+            rows: "1078,1079,1081,863"
+          - name: "short10-6"
+            rows: "1082,864,1323,1087"
+          - name: "short10-7"
+            rows: "1427,1449,1015,1203"
+          - name: "short10-8"
+            rows: "1332,1249,1088,869"
+          - name: "short10-9"
+            rows: "1388,871,1428,1096"
+          - name: "short10-10"
+            rows: "956,1007,874,1370"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only GIS dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Exact historic LINZ KML geometry and bounding box
+        run: python scripts/historic_kml_metadata.py --rows "${{ matrix.rows }}"
+      - name: Herenga a Nuku published walking/shared use paths
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking-experience GIS
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official 2026-27 Te Araroa GPS matching
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Community-mapped path / name clues (not proof of access)
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch10-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore
