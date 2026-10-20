@@ -1,0 +1,44 @@
+name: Connected footway and strict corridor - last 24 plus six split lines
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-connected-footways-b2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  footway-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "connected-1"
+            rows: "878,872,1180,1346,1127"
+          - name: "connected-2"
+            rows: "870,973,1352,1153,868"
+          - name: "connected-3"
+            rows: "876,1106,1450,1400,1260"
+          - name: "connected-4"
+            rows: "1398,1259,969,1389,862"
+          - name: "connected-5"
+            rows: "861,1099,888,1094,1018"
+          - name: "connected-6"
+            rows: "1132,1122,1456,1119,865"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only geospatial dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Main way and endpoint-connected pedestrian footway groups
+        run: python scripts/modern_footway_access_corridor.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-connected-${{ matrix.name }}"
+          path: corridor_*.json
+          if-no-files-found: warn
