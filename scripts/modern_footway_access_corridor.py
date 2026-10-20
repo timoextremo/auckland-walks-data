@@ -19,6 +19,56 @@ ELIGIBLE = {"footway", "path", "pedestrian", "steps", "track", "bridleway", "cyc
 NOT_FOOT = {"no", "private", "agricultural", "forestry"}
 # A cycleway without a foot tag might be bicycles-only; do not treat it as a footway.
 
+def connected_modern_groups(usable, old, area):
+    """Group touching modern mapped segments via endpoints, not nearby road links.
+
+    Deliberately rejects crossings without a shared endpoint. A footpath split
+    across multiple OSM ways can then be assessed without counting every
+    disconnected/parallel footway in the wider 15m buffer.
+    """
+    pieces=[]
+    for geom,item in usable:
+        candidates=list(geom.geoms) if hasattr(geom,"geoms") else [geom]
+        for part in candidates:
+            if part.geom_type!="LineString" or part.length<1:continue
+            pieces.append((part,item))
+    parent=list(range(len(pieces)))
+    def root(i):
+        while parent[i]!=i:
+            parent[i]=parent[parent[i]]
+            i=parent[i]
+        return i
+    def union(i,j):
+        i,j=root(i),root(j)
+        if i!=j:parent[max(i,j)]=min(i,j)
+    def endpoints(x):
+        return (x.coords[0],x.coords[-1])
+    for i,(a,_) in enumerate(pieces):
+        e1=endpoints(a)
+        for j in range(i+1,len(pieces)):
+            b=pieces[j][0]
+            # Endpoint proximity, not mid-line crossings; avoid merging
+            # grade-separated paths whose lines cross on a flat map.
+            e2=endpoints(b)
+            if min((x[0]-y[0])**2+(x[1]-y[1])**2 for x in e1 for y in e2)<=2.25:
+                union(i,j)
+    clusters={}
+    for i,x in enumerate(pieces):
+        clusters.setdefault(root(i),[]).append(x)
+    output=[]
+    for members in clusters.values():
+        geom=unary_union([x for x,_ in members])
+        length=geom.length
+        if length<1:continue
+        walk=round(100*old.intersection(geom.buffer(10)).length/old.length,1)
+        wams=round(100*geom.intersection(area).length/length,1) if area else 0.0
+        output.append({"n_parts":len(members),"segment_m":round(length,1),
+          "old_within10m_pct":walk,"wams_yes_pct":wams,
+          "ways":sorted(set(item["way"] for _,item in members))[:30],
+          "candidate":bool(length>=old.length*.5 and walk>=75 and wams>=90)})
+    output.sort(key=lambda x:(-x["old_within10m_pct"],-x["wams_yes_pct"],-x["segment_m"]))
+    return output
+
 def run_row(row):
     old_lines=lines_for(row)
     if not old_lines: raise ValueError(f"No source geometry row={row}")
@@ -93,6 +143,7 @@ def run_row(row):
     segment_checks.sort(key=lambda q:(-q["old_near_this_way_10m_pct"],
                                       -q["way_wams_mapped_yes_pct"],-q["segment_m"]))
     principal_correspondence=any(x["strict_primary_correspondence"] for x in segment_checks)
+    connected_groups=connected_modern_groups(usable,old,area)
     # CORRIDOR_CANDIDATE is a geometric clue, not a legality classification.
     candidate=bool(modern_all>5 and overlap>=85 and modern_yes is not None and
                    modern_yes>=90 and (modern_yes-historical_yes)>=20)
@@ -105,6 +156,8 @@ def run_row(row):
       "potential_cadastral_centreline_offset":candidate,
       "strict_primary_way_wams_candidate":principal_correspondence,
       "principal_way_checks":segment_checks[:12],
+      "connected_footway_groups":connected_groups[:10],
+      "connected_footway_candidate":any(x["candidate"] for x in connected_groups),
       "modern_way_examples":[r for g,r in usable][:12],
       "excluded_way_examples":ignored[:8],
       "wams_nearby_by_layer":layers,
