@@ -33,7 +33,7 @@ def check(row):
     if not raw: raise RuntimeError("Missing historical KML lines")
     b=bounds_of(raw)
     route=unary_union([transform(WGS_TO_NZTM,l) for l in raw])
-    yes=[];not_yes=[];layer_details=[];errors=[]
+    yes=[];yes_polygons=[];not_yes=[];layer_details=[];errors=[]
     for n,label in LAYERS.items():
         fs=request_features(n,b)
         for f in fs:
@@ -44,11 +44,20 @@ def check(row):
             props=f.get("attributes",{})
             typ=str(props.get("public_access") or "missing").lower()
             item={"layer":label,"access":typ,"objectid":props.get("OBJECTID"),"name":props.get("common_name"),"type":props.get("paa_type"),"covered_m":round(section.length,2)}
-            if typ=="yes": yes.append(section)
+            if typ=="yes":
+                yes.append(section)
+                yes_polygons.append(geom)
             else: not_yes.append((geom,item))
             layer_details.append(item)
-    mapped=unary_union(yes) if yes else None
-    missing=route.difference(mapped) if mapped else route
+    # Difference against area polygons, NOT the GEOS-generated clipped line pieces:
+    # tiny floating-point variations can otherwise erase most of a coincident
+    # line when intersecting/differencing the same nominal GIS alignment.
+    mapped_area=unary_union(yes_polygons) if yes_polygons else None
+    reference_yes=unary_union(yes).length if yes else 0
+    direct_yes=route.intersection(mapped_area).length if mapped_area else 0
+    if abs(reference_yes-direct_yes)>max(1.5,route.length*.005):
+        raise ValueError(f"WAMS line-vs-polygon coverage mismatch: {reference_yes:.1f}m vs {direct_yes:.1f}m")
+    missing=route.difference(mapped_area) if mapped_area else route
     parcels=load_parcels(b)
     parsed=[]
     for f in parcels:
@@ -76,8 +85,9 @@ def check(row):
            "parcel_intersections":near[:8],"non_yes_wams":nonyes[:6]})
     segments.sort(key=lambda x:-x["missing_m"])
     return {"row":row,"old_m":round(route.length,2),
-            "yes_m":round(route.intersection(mapped).length if mapped else 0,2),
-            "yes_pct":round(100*(route.intersection(mapped).length if mapped else 0)/route.length,2),
+            "yes_m":round(direct_yes,2),
+            "yes_pct":round(100*direct_yes/route.length,2),
+            "geometry_consistency_delta_m":round(abs(reference_yes-direct_yes),4),
             "unmapped_segments":segments,"gap_count":len(segments),
             "unmapped_total_m":round(sum(x["missing_m"] for x in segments),2),
             "mapped_layer_examples":layer_details[:12],
