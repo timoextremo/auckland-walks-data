@@ -1,0 +1,76 @@
+name: Access triage - nine exact gaps and next 40 Tier A
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-triage-pass2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-gaps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install GIS dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Decompose nine unresolved WAMS gaps into exact geometry with matching parcel context
+        run: python scripts/wams_exact_gap_segments.py --rows "858,1272,1248,875,915,1161,879,1298,1125" --name pilot-nine
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: access-triage-exact-gaps
+          path: wams_access_gap_*.json
+  next-tier-a:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "A-pass2-1"
+            rows: "813,882,884,894"
+          - name: "A-pass2-2"
+            rows: "895,911,919,959"
+          - name: "A-pass2-3"
+            rows: "968,970,1101,1104"
+          - name: "A-pass2-4"
+            rows: "1113,1115,1129,1130"
+          - name: "A-pass2-5"
+            rows: "1131,1134,1135,1144"
+          - name: "A-pass2-6"
+            rows: "1146,1149,1157,1158"
+          - name: "A-pass2-7"
+            rows: "1163,1178,1189,1190"
+          - name: "A-pass2-8"
+            rows: "1205,1274,1279,1280"
+          - name: "A-pass2-9"
+            rows: "1282,1283,1285,1286"
+          - name: "A-pass2-10"
+            rows: "1287,1294,1299,1391"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install GIS dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: WAMS exact-line legal-road/reserve/easement classes
+        run: python scripts/land_access_herenga_pilot.py --rows "${{ matrix.rows }}"
+      - name: Regional official track GIS match
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking experience GIS match
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-triage-${{ matrix.name }}"
+          path: |
+            wams-batch-*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
