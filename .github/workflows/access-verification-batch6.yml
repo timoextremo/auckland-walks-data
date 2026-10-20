@@ -1,0 +1,65 @@
+name: Batch 6 mixed-WAMS historical routes
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch6.yml'
+      - 'scripts/historic_kml_metadata.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "mixed-1"
+            rows: "832,1344,927,1226"
+          - name: "mixed-2"
+            rows: "853,1442,1208,1027"
+          - name: "mixed-3"
+            rows: "1182,1311,1414,1340"
+          - name: "mixed-4"
+            rows: "1328,1412,826,1045"
+          - name: "mixed-5"
+            rows: "824,1409,1339,942"
+          - name: "mixed-6"
+            rows: "1053,1188,1218,1366"
+          - name: "mixed-7"
+            rows: "834,1345,819,848"
+          - name: "mixed-8"
+            rows: "1325,1051,845,828"
+          - name: "mixed-9"
+            rows: "913,1034,1377,840"
+          - name: "mixed-10"
+            rows: "915,1424,1467,933"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only GIS dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Read original source KML geometry and locality bounds
+        run: python scripts/historic_kml_metadata.py --rows "${{ matrix.rows }}"
+      - name: Herenga a Nuku production Auckland walking and shared paths
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published website experience routes
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Te Araroa official 2026-27 GPS
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Independently mapped OSM paths and route-name clues
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch6-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore
