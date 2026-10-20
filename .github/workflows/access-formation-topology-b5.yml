@@ -1,0 +1,75 @@
+name: Historical access audit B5 - full OSM nodes plus next 40
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-formation-topology-b5.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-osm-topology:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Full unclipped OSM shared-node topology and WAMS polygon comparison
+        run: python scripts/full_way_topology_access.py --rows "1119,1099" --name "redbeach-unsworth"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-way-redbeach-unsworth
+          path: full_way_*.json
+          if-no-files-found: warn
+  formation-next-40:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "formation-b5-1"
+            rows: "877,1351,993,831"
+          - name: "formation-b5-2"
+            rows: "837,841,843,847"
+          - name: "formation-b5-3"
+            rows: "849,851,855,857"
+          - name: "formation-b5-4"
+            rows: "859,871,874,916"
+          - name: "formation-b5-5"
+            rows: "925,931,938,939"
+          - name: "formation-b5-6"
+            rows: "940,941,943,951"
+          - name: "formation-b5-7"
+            rows: "956,985,989,997"
+          - name: "formation-b5-8"
+            rows: "999,1003,1006,1007"
+          - name: "formation-b5-9"
+            rows: "1011,1012,1013,1015"
+          - name: "formation-b5-10"
+            rows: "1031,1040,1043,1044"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: WAMS exact historical land/access overlay
+        run: python scripts/land_access_herenga_pilot.py --rows "${{ matrix.rows }}"
+      - name: Official Herenga a Nuku regional walking layer
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official DOC walking experiences
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "formation-next40-${{ matrix.name }}"
+          path: |
+            wams-batch-*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
