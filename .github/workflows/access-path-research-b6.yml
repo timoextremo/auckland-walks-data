@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/access-path-research-b6.yml'
+      - 'scripts/named_route_exact_alignment.py'
   workflow_dispatch:
 permissions:
   contents: read
