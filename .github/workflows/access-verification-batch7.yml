@@ -1,0 +1,64 @@
+name: Batch 7 mixed-WAMS historical routes
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch7.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "mixed7-1"
+            rows: "850,823,1195,1371"
+          - name: "mixed7-2"
+            rows: "1468,1327,818,914"
+          - name: "mixed7-3"
+            rows: "1223,1175,825,1202"
+          - name: "mixed7-4"
+            rows: "835,1322,1037,934"
+          - name: "mixed7-5"
+            rows: "844,1231,812,923"
+          - name: "mixed7-6"
+            rows: "924,842,1353,1232"
+          - name: "mixed7-7"
+            rows: "1482,1191,1374,1000"
+          - name: "mixed7-8"
+            rows: "1056,1035,854,1465"
+          - name: "mixed7-9"
+            rows: "1458,1434,1002,1004"
+          - name: "mixed7-10"
+            rows: "990,1419,1229,947"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install geospatial dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Historical source KML coordinates and metadata
+        run: python scripts/historic_kml_metadata.py --rows "${{ matrix.rows }}"
+      - name: Official Herenga a Nuku mapped Auckland paths
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official DOC published walking-experience GIS
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official Te Araroa 2026-27 GPX
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Independent path mapping names (not legal access certification)
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch7-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore
