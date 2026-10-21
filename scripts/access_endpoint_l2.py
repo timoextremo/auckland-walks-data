@@ -74,9 +74,11 @@ def audit(row):
                 'near_m':round(p.distance(old),1)}
             if length>=.5:
                 hits.append(item)
-                if str(a.get('public_access','')).lower()=='yes':public.append(cut)
+                if str(a.get('public_access','')).lower()=='yes':public.append(p)
             elif item['name']:maybe.append(item)
     union=unary_union(public) if public else None
+    # Union POLYGONS, not clipped historical line fragments; line-on-line
+    # intersections can produce false zeroes due to floating precision.
     cov=100*old.intersection(union).length/old.length if union is not None else 0
     return {'row':row,'historic_length_m':round(old.length,1),
         'old_wgs84_endpoints':[[list(l.coords[i]) for i in (0,-1)] for l in raw],
