@@ -1,0 +1,50 @@
+name: Accelerated L2 final 36 high-confidence mapped tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-endpoint-fast-36.yml'
+      - 'scripts/access_endpoint_l2.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  endpoint-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        include:
+          - name: fast-01
+            rows: '1283,1285,1286,1287'
+          - name: fast-02
+            rows: '1289,1294,1299,1304'
+          - name: fast-03
+            rows: '1391,1392,1393,1396'
+          - name: fast-04
+            rows: '1397,1399,1403,1405'
+          - name: fast-05
+            rows: '1453,919,1115,1129'
+          - name: fast-06
+            rows: '1130,1131,1134,1135'
+          - name: fast-07
+            rows: '1117,815,1102,1098'
+          - name: fast-08
+            rows: '858,1133,1141,1107'
+          - name: fast-09
+            rows: '1072,1092,883,1142'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Audit four historical endpoints, corridor polygons and restricted side paths
+        run: python scripts/access_endpoint_l2.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "accelerated-l2-${{ matrix.name }}"
+          path: "endpoint_l2_*.json"
+          if-no-files-found: warn
