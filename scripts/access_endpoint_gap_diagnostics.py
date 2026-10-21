@@ -10,9 +10,11 @@ import json
 import pathlib
 
 from pyproj import Transformer
+from shapely.geometry import Point
 from shapely.ops import transform, unary_union, nearest_points
 from full_way_topology_access import load_full_osm, grouped
-from land_access_primary_parcels import WGS_TO_NZTM, lines_for
+from land_access_primary_parcels import WGS_TO_NZTM, lines_for, poly_from_rings
+from land_access_herenga_pilot import LAYERS,request_features
 
 TO_WGS = Transformer.from_crs("EPSG:2193","EPSG:4326",always_xy=True).transform
 
@@ -43,6 +45,28 @@ def evaluate(row):
     a=main["_modern"];b=second["_modern"]
     q1,q2=nearest_points(a,b)
     joining=round(q1.distance(q2),2)
+
+    # Test whether the short gap between disconnected OSM ways and WAMS's
+    # historical public-access map gap are actually co-located. This prevents
+    # conflating two similar-sized gaps at different places.
+    mid=Point((q1.x+q2.x)/2,(q1.y+q2.y)/2)
+    yespolys=[]
+    for layer in LAYERS:
+        for feat in request_features(layer,bbox):
+            attrs=feat.get("attributes",{})
+            if str(attrs.get("public_access") or "").lower()!="yes":continue
+            poly=poly_from_rings(feat.get("geometry",{}).get("rings",[]))
+            if poly is not None and not poly.is_empty and poly.intersects(old.buffer(3)):
+                yespolys.append(poly)
+    public=unary_union(yespolys) if yespolys else None
+    missing=old.difference(public) if public is not None else old
+    pieces=list(missing.geoms) if hasattr(missing,"geoms") else ([] if missing.is_empty else [missing])
+    missing_parts=sorted([{"length_m":round(g.length,2),
+       "midpoint_wgs84":list(transform(TO_WGS,g.interpolate(.5,normalized=True)).coords)[0],
+       "distance_from_osm_gap_m":round(g.distance(mid),2)}
+       for g in pieces if g.geom_type=="LineString" and g.length>.25],
+       key=lambda x:-x["length_m"])
+    gap_public=[public is not None and public.buffer(.1).covers(pt) for pt in (q1,q2,mid)]
     x1=transform(TO_WGS,q1);x2=transform(TO_WGS,q2)
     u=unary_union([a.buffer(10),b.buffer(10)])
     uncovered=old.difference(u)
@@ -56,6 +80,9 @@ def evaluate(row):
       "group_count":len(groups),"best_groups":[summary(main),summary(second)],
       "best_group_ends_m":endpoint_distance(a),"other_group_ends_m":endpoint_distance(b),
       "minimum_between_groups_m":joining,
+      "osm_gap_points_and_midpoint_in_wams_public_yes":gap_public,
+      "wams_public_yes_pct_old":round(100*old.intersection(public).length/old.length,1) if public is not None else 0,
+      "wams_unmapped_historic_segments":missing_parts[:10],
       "closest_group_points_wgs84":[list(x1.coords)[0],list(x2.coords)[0]],
       "distance_of_join_points_from_old_m":[round(q1.distance(old),2),round(q2.distance(old),2)],
       "combined_two_group_within10m_pct":round(100*old.intersection(u).length/old.length,1),
