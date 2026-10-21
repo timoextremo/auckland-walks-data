@@ -1,0 +1,40 @@
+name: Council-park pilot independent OSM geometry check
+on:
+  pull_request:
+    paths:
+      - 'scripts/osm_small_bbox_check.py'
+      - '.github/workflows/osm-small-bbox-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "parks-1"
+            rows: "811,816,820"
+          - name: "parks-2"
+            rows: "827,851,925"
+          - name: "parks-3"
+            rows: "926,931,932"
+          - name: "parks-4"
+            rows: "935,937,946"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install spatial packages
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Corroborate old foot-track geometry with small OSM map API requests
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "osm-small-bbox-${{ matrix.name }}"
+          path: local_osm_*.json
+          if-no-files-found: ignore

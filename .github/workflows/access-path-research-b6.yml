@@ -1,0 +1,76 @@
+name: Access B6 - modern path formation leads and named-route geometry
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b6.yml'
+      - 'scripts/named_route_exact_alignment.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  nearby-modern-paths:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - label: "b6-01"
+            rows: "1047,1049,1052,1054"
+          - label: "b6-02"
+            rows: "1057,1063,1069,1070"
+          - label: "b6-03"
+            rows: "1075,1076,1078,1081"
+          - label: "b6-04"
+            rows: "1082,1087,1088,1186"
+          - label: "b6-05"
+            rows: "1187,1203,1215,1216"
+          - label: "b6-06"
+            rows: "1220,1233,1234,1249"
+          - label: "b6-07"
+            rows: "1302,1309,1310,1317"
+          - label: "b6-08"
+            rows: "1319,1323,1334,1338"
+          - label: "b6-09"
+            rows: "1364,1368,1372,1380"
+          - label: "b6-10"
+            rows: "1384,1417,1420,1421"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Nearby path geometry, bounded OSM map API
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.label }}"
+      - name: Official regional route geometry overlay
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.label }}"
+      - name: DOC published walking-experience geometry
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.label }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b6-${{ matrix.label }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
+  named-route-detail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Per-official-feature historical segment and endpoint comparison
+        run: python scripts/named_route_exact_alignment.py --rows "837,1015,1011,993" --name b6-name-checks
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: named-route-exact-b6
+          path: named_route_alignment_*.json
+          if-no-files-found: warn

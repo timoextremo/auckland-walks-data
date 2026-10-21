@@ -1,0 +1,41 @@
+name: Legal corridor layer L1 - connected paths and WAMS public area
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-legal-corridor-l1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  legal-corridor-candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - name: "legal-pilot-01"
+            rows: "813,882,884,886"
+          - name: "legal-pilot-02"
+            rows: "892,893,894,895"
+          - name: "legal-pilot-03"
+            rows: "896,911,920,921"
+          - name: "legal-pilot-04"
+            rows: "922,959,968,970"
+          - name: "legal-pilot-05"
+            rows: "1101,1103,1104,1113"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Preserve unclipped OSM shared-node connectivity and compare mapped public access
+        run: python scripts/full_way_topology_access.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-legal-l1-${{ matrix.name }}"
+          path: "full_way_*.json"
+          if-no-files-found: warn

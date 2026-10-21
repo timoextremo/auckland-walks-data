@@ -1,0 +1,60 @@
+name: Batch 9 final 31 length-qualified LINZ tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch9.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "final9-1"
+            rows: "991,1064,1225,1192"
+          - name: "final9-2"
+            rows: "930,1475,1210,929"
+          - name: "final9-3"
+            rows: "829,1222,1357,1356"
+          - name: "final9-4"
+            rows: "988,1169,1170,1171"
+          - name: "final9-5"
+            rows: "1172,1173,1181,1197"
+          - name: "final9-6"
+            rows: "1198,1211,1213,1315"
+          - name: "final9-7"
+            rows: "1337,1426,1433,1435"
+          - name: "final9-8"
+            rows: "1438,1461,1470"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only GIS dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Original historical KML bounding boxes
+        run: python scripts/historic_kml_metadata.py --rows "${{ matrix.rows }}"
+      - name: Herenga a Nuku official Auckland walking and shared use
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published official walking-experience route lines
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official Te Araroa 2026-27 GPX route geometry
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: OSM community mapped names and path corroboration only
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch9-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore

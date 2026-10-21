@@ -1,0 +1,42 @@
+name: L2 historical accessway endpoints and restricted paths
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-endpoint-l2.yml'
+      - 'scripts/access_endpoint_l2.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  endpoint-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - name: reserve-a
+            rows: '884,922,959,970'
+          - name: reserve-b
+            rows: '1101,1103,1104,893'
+          - name: urban-a
+            rows: '813,882,886,892'
+          - name: urban-b
+            rows: '894,895,896,911'
+          - name: urban-c
+            rows: '920,921,968,1113'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Check historic endpoints, intersecting public access and restricted ways
+        run: python scripts/access_endpoint_l2.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-endpoint-l2-${{ matrix.name }}"
+          path: "endpoint_l2_*.json"
+          if-no-files-found: warn

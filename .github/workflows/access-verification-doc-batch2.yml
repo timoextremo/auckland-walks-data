@@ -1,0 +1,47 @@
+name: Batch 2 DOC published walking experiences
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-doc-batch2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  doc-experiences:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "prior-1"
+            rows: "811,816,820,821,822"
+          - name: "prior-2"
+            rows: "827,830,831,833,836"
+          - name: "prior-3"
+            rows: "837,838,839,841,843"
+          - name: "prior-4"
+            rows: "846,847,849,851,855"
+          - name: "prior-5"
+            rows: "856,916,917,925,926"
+          - name: "prior-6"
+            rows: "928,931,932,935,936"
+          - name: "prior-7"
+            rows: "937,938,939,940,941"
+          - name: "prior-8"
+            rows: "943,944,945,946,985"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Match historic routes against DOC published website-experience GIS
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch2-doc-${{ matrix.name }}"
+          path: doc_match_*.json
+          if-no-files-found: ignore

@@ -1,0 +1,64 @@
+name: Batch 8 lower-WAMS historical tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch8.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "mixed8-1"
+            rows: "1224,1446,980,1308"
+          - name: "mixed8-2"
+            rows: "1480,1221,1335,1355"
+          - name: "mixed8-3"
+            rows: "1230,918,1236,1321"
+          - name: "mixed8-4"
+            rows: "1050,1058,1481,1430"
+          - name: "mixed8-5"
+            rows: "1001,1373,1174,1343"
+          - name: "mixed8-6"
+            rows: "1462,1471,1067,1432"
+          - name: "mixed8-7"
+            rows: "1061,1479,1367,1361"
+          - name: "mixed8-8"
+            rows: "1411,1316,1477,1059"
+          - name: "mixed8-9"
+            rows: "1227,852,1016,1194"
+          - name: "mixed8-10"
+            rows: "1473,948,1219,1341"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install GIS Python dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Source LINZ historical track KML extents
+        run: python scripts/historic_kml_metadata.py --rows "${{ matrix.rows }}"
+      - name: Herenga a Nuku mapped Auckland walking and shared paths
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking route geometry
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Te Araroa current 2026-27 GPX alignment
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Independently volunteer-mapped paths and local track names
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch8-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore

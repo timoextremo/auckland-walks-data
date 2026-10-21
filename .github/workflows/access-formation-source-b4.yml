@@ -1,0 +1,59 @@
+name: Access formation leads - forty WAMS-rich OSM-sparse paths
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-formation-source-b4.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "b-formation-1"
+            rows: "1425,907,839,834"
+          - name: "b-formation-2"
+            rows: "1077,1079,1332,1378"
+          - name: "b-formation-3"
+            rows: "1379,1478,1383,1328"
+          - name: "b-formation-4"
+            rows: "1409,833,846,856"
+          - name: "b-formation-5"
+            rows: "864,1005,1009,1010"
+          - name: "b-formation-6"
+            rows: "1033,1055,1060,1062"
+          - name: "b-formation-7"
+            rows: "1096,1185,1228,1235"
+          - name: "b-formation-8"
+            rows: "1385,1388,1048,1326"
+          - name: "b-formation-9"
+            rows: "1200,1182,826,1325"
+          - name: "b-formation-10"
+            rows: "1008,850,1202,830"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only GIS dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Public access overlay class source on exact historic GIS line
+        run: python scripts/land_access_herenga_pilot.py --rows "${{ matrix.rows }}"
+      - name: Official Herenga a Nuku published tracks overlay
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC managed walking experience overlay
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "formation-review-${{ matrix.name }}"
+          path: |
+            wams-batch-*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn

@@ -1,0 +1,58 @@
+name: Access B9 - next forty historic path and route geometry checks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b9.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historic-paths:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: b9-01
+            rows: "1345,819,848,1051"
+          - name: b9-02
+            rows: "845,828,913,1034"
+          - name: b9-03
+            rows: "1377,840,1424,1467"
+          - name: b9-04
+            rows: "933,1306,823,1263"
+          - name: b9-05
+            rows: "1195,860,1371,1468"
+          - name: b9-06
+            rows: "1327,949,818,914"
+          - name: b9-07
+            rows: "1223,1175,825,1250"
+          - name: b9-08
+            rows: "835,1322,1162,1083"
+          - name: b9-09
+            rows: "1349,1251,1199,1143"
+          - name: b9-10
+            rows: "1333,955,1395,1410"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Bounded modern OSM walking geometry
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Regional official named and unnamed walking geometry
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking tracks
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b9-${{ matrix.name }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn

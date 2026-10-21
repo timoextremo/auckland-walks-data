@@ -1,0 +1,41 @@
+name: DOC open managed track pilot
+on:
+  pull_request:
+    paths:
+      - 'scripts/doc_open_track_match.py'
+      - '.github/workflows/doc-open-track-match.yml'
+      - 'map-data/auckland-walks/clusters/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  match-doc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "islands"
+            rows: "996,912,1196"
+          - name: "north"
+            rows: "1320,1022,1023"
+          - name: "forest"
+            rows: "994,1457,1354"
+          - name: "other"
+            rows: "1025,982,1362"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install spatial matching dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Match exact historical KML geometry to DOC mapped open centrelines
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "doc-open-track-${{ matrix.name }}"
+          path: doc_match_*.json
+          if-no-files-found: ignore

@@ -1,0 +1,58 @@
+name: Access B7 - next forty published and mapped path checks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b7.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historic-paths:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: b7-01
+            rows: "1422,1427,1428,1431"
+          - name: b7-02
+            rows: "1436,1437,1439,1441"
+          - name: b7-03
+            rows: "1445,1449,1459,1460"
+          - name: b7-04
+            rows: "1463,1466,1472,1474"
+          - name: b7-05
+            rows: "1476,1484,1416,901"
+          - name: b7-06
+            rows: "936,1209,1329,1179"
+          - name: b7-07
+            rows: "1026,1028,1024,816"
+          - name: b7-08
+            rows: "1214,1042,1065,926"
+          - name: b7-09
+            rows: "1206,1415,944,821"
+          - name: b7-10
+            rows: "932,1030,1363,1212"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Read-only local OSM path geometry
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Regional authoritative route corridor match
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking route corridor match
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b7-${{ matrix.name }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn

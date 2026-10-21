@@ -1,0 +1,45 @@
+name: LINZ primary parcel pilot
+on:
+  pull_request:
+    paths:
+      - 'scripts/land_access_primary_parcels.py'
+      - '.github/workflows/land-access-pilot.yml'
+      - 'map-data/auckland-walks/clusters/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  intersect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "1404-1410"
+            rows: "1404,1405,1406,1407,1408,1409,1410"
+          - name: "1411-1417"
+            rows: "1411,1412,1413,1414,1415,1416,1417"
+          - name: "1419-1425"
+            rows: "1419,1420,1421,1422,1423,1424,1425"
+          - name: "1426-1432"
+            rows: "1426,1427,1428,1429,1430,1431,1432"
+          - name: "1433-1439"
+            rows: "1433,1434,1435,1436,1437,1438,1439"
+          - name: "1440-1444"
+            rows: "1440,1441,1442,1443,1444"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install public GIS dependencies
+        run: python -m pip install --quiet shapely>=2.0 pyproj>=3.5 requests>=2.31
+      - name: Intersect first 21 route geometries with LINZ public primary parcels
+        run: python scripts/land_access_primary_parcels.py --rows "${{ matrix.rows }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "primary-parcel-${{ matrix.name }}"
+          path: primary_parcel_pilot.json
+          if-no-files-found: ignore

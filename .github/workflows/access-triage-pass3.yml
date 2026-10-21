@@ -1,0 +1,61 @@
+name: Access triage - final sixty-six Tier A
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-triage-pass3.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  further-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "A-pass3-1"
+            rows: "1392,1393,1397,1399,1403,1405"
+          - name: "A-pass3-2"
+            rows: "1453,1147,815,1167,1102,958"
+          - name: "A-pass3-3"
+            rows: "1098,1396,1133,1141,1204,1107"
+          - name: "A-pass3-4"
+            rows: "1072,1092,883,1142,1304,1301"
+          - name: "A-pass3-5"
+            rows: "1423,1151,903,1394,1164,1120"
+          - name: "A-pass3-6"
+            rows: "1128,960,1243,1150,1448,1090"
+          - name: "A-pass3-7"
+            rows: "905,954,866,1241,1165,1238"
+          - name: "A-pass3-8"
+            rows: "1254,1264,1154,976,1111,1291"
+          - name: "A-pass3-9"
+            rows: "1452,1095,1387,972,1240,1348"
+          - name: "A-pass3-10"
+            rows: "963,1252,1305,1140,1017,1295"
+          - name: "A-pass3-11"
+            rows: "1273,1156,1105,953,1451,1155"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only GIS requirements
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: WAMS six public-access layers on exact historical centreline
+        run: python scripts/land_access_herenga_pilot.py --rows "${{ matrix.rows }}"
+      - name: Herenga a Nuku published regional walking/shared use
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking experience
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-triage-${{ matrix.name }}"
+          path: |
+            wams-batch-*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn

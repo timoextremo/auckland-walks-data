@@ -1,0 +1,63 @@
+name: Batch 3 land-access route matching
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-verification-batch3.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        include:
+          - name: "third-1"
+            rows: "989,999,1003,1005"
+          - name: "third-2"
+            rows: "1009,1010,1011,1012"
+          - name: "third-3"
+            rows: "1014,1019,1024,1026"
+          - name: "third-4"
+            rows: "1028,1029,1030,1031"
+          - name: "third-5"
+            rows: "1032,1033,1036,1038"
+          - name: "third-6"
+            rows: "1039,1040,1041,1042"
+          - name: "third-7"
+            rows: "1043,1044,1046,1047"
+          - name: "third-8"
+            rows: "1048,1049,1052,1054"
+          - name: "third-9"
+            rows: "1055,1057,1060,1062"
+          - name: "third-10"
+            rows: "1063,1065,1066,1179"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install geospatial dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Herenga a Nuku production mapped tracks
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking experiences route GIS
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official Te Araroa 2026-27 route GPS
+        run: python scripts/te_araroa_route_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Volunteer-mapped path corroboration and names (not legal access)
+        continue-on-error: true
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-batch3-${{ matrix.name }}"
+          path: |
+            oac_match_*.json
+            doc_match_*.json
+            ta_match_*.json
+            local_osm_*.json
+          if-no-files-found: ignore

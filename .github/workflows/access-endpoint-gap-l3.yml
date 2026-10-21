@@ -1,0 +1,27 @@
+name: L3 short historical path gap topology diagnostics
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-endpoint-gap-l3.yml'
+      - 'scripts/access_endpoint_gap_diagnostics.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Measure independently connected route sections for Snells Beach and Papakura
+        run: python scripts/access_endpoint_gap_diagnostics.py --rows '1205,1248'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: access-endpoint-gap-l3
+          path: endpoint_gap_diagnostic.json
+          if-no-files-found: warn

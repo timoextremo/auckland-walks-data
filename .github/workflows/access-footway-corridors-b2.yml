@@ -1,0 +1,52 @@
+name: Modern footway vs historic WAMS - next forty tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-footway-corridors-b2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  footway-versus-old-line:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "corridor-b2-1"
+            rows: "887,881,978,1275"
+          - name: "corridor-b2-2"
+            rows: "1118,971,873,1483"
+          - name: "corridor-b2-3"
+            rows: "1136,1138,1132,1137"
+          - name: "corridor-b2-4"
+            rows: "1126,904,889,1404"
+          - name: "corridor-b2-5"
+            rows: "1166,1123,890,1139"
+          - name: "corridor-b2-6"
+            rows: "964,1018,1094,1265"
+          - name: "corridor-b2-7"
+            rows: "888,1454,1099,1159"
+          - name: "corridor-b2-8"
+            rows: "861,1100,1389,1071"
+          - name: "corridor-b2-9"
+            rows: "969,1259,1398,1110"
+          - name: "corridor-b2-10"
+            rows: "1260,1400,1450,1270"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only geospatial dependencies
+        run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Contrast historical LINZ centreline and modern pedestrian network against WAMS
+        run: python scripts/modern_footway_access_corridor.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "modern-footway-${{ matrix.name }}"
+          path: corridor_*.json
+          if-no-files-found: warn

@@ -1,0 +1,42 @@
+name: L2 P1B next twenty historical accessway endpoints
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-endpoint-p1b.yml'
+      - 'scripts/access_endpoint_l2.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  endpoint-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: p1b-northwest
+            rows: '1144,1145,1146,1147'
+          - name: p1b-north
+            rows: '1149,1157,1158,1163'
+          - name: p1b-urban
+            rows: '1167,1178,1189,1190'
+          - name: p1b-southwest
+            rows: '1204,1205,1248,1272'
+          - name: p1b-south
+            rows: '1274,1279,1280,1282'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Check exact route, on-line public-access polygons and nearby restricted ways
+        run: python scripts/access_endpoint_l2.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-endpoint-p1b-${{ matrix.name }}"
+          path: "endpoint_l2_*.json"
+          if-no-files-found: warn
