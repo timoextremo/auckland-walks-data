@@ -1,0 +1,58 @@
+name: Access B10 - next forty modern paths and official geometry
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b10.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historical-walks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "b10-01"
+            rows: "957,1258,1257,1330"
+          - name: "b10-02"
+            rows: "1021,1245,1093,1020"
+          - name: "b10-03"
+            rows: "891,1303,1037,934"
+          - name: "b10-04"
+            rows: "1239,844,1084,1231"
+          - name: "b10-05"
+            rows: "812,923,842,1353"
+          - name: "b10-06"
+            rows: "1232,1482,1277,1191"
+          - name: "b10-07"
+            rows: "1374,1000,1056,1035"
+          - name: "b10-08"
+            rows: "1080,854,1465,1458"
+          - name: "b10-09"
+            rows: "1434,1002,1004,990"
+          - name: "b10-10"
+            rows: "1440,1419,1229,947"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Local current OSM footpath geometry
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Regional mapped official walk geometry
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC mapped walking experience
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b10-${{ matrix.name }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
