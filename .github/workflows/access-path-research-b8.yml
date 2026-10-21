@@ -1,0 +1,58 @@
+name: Access B8 - next forty formation and named-track overlays
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b8.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  modern-and-official:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: b8-01
+            rows: "822,1342,1358,1041"
+          - name: b8-02
+            rows: "838,1046,1318,928"
+          - name: b8-03
+            rows: "1029,1376,945,1036"
+          - name: b8-04
+            rows: "836,1336,992,1444"
+          - name: b8-05
+            rows: "820,1365,832,1344"
+          - name: b8-06
+            rows: "927,1226,1255,853"
+          - name: b8-07
+            rows: "1261,1208,1027,1311"
+          - name: b8-08
+            rows: "1414,1340,1412,1045"
+          - name: b8-09
+            rows: "824,1347,942,1053"
+          - name: b8-10
+            rows: "1188,1218,1366,952"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Bounded modern OSM walking path geometry
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Herenga a Nuku regional walking tracks (geometry only)
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC mapped walking experience (geometry only)
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b8-${{ matrix.name }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
