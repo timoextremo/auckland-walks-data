@@ -1,0 +1,56 @@
+name: Access B13 - final thirty four historic walking tracks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b13.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historical-walks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "b13-01"
+            rows: "1225,1324,1192,930"
+          - name: "b13-02"
+            rows: "1475,1022,1210,929"
+          - name: "b13-03"
+            rows: "829,1357,1356,1354"
+          - name: "b13-04"
+            rows: "1176,880,988,1169"
+          - name: "b13-05"
+            rows: "1170,1171,1172,1173"
+          - name: "b13-06"
+            rows: "1181,1196,1198,1211"
+          - name: "b13-07"
+            rows: "1213,1315,1337,1362"
+          - name: "b13-08"
+            rows: "1426,1433,1435,1438"
+          - name: "b13-09"
+            rows: "1461,1470"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Bounded read-only modern OSM walking-path geometry
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Herenga a Nuku regional walking route geometries
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking-experience geometry
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b13-${{ matrix.name }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
