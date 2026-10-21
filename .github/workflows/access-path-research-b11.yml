@@ -1,0 +1,58 @@
+name: Access B11 - next forty historic walking track checks
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/access-path-research-b11.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historical-walks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - name: "b11-01"
+            rows: "1224,1446,980,1278"
+          - name: "b11-02"
+            rows: "1480,1221,1237,1335"
+          - name: "b11-03"
+            rows: "1244,1355,1296,1230"
+          - name: "b11-04"
+            rows: "1184,867,918,1242"
+          - name: "b11-05"
+            rows: "1236,1085,1321,1050"
+          - name: "b11-06"
+            rows: "1058,1350,995,1457"
+          - name: "b11-07"
+            rows: "1481,1430,1023,1001"
+          - name: "b11-08"
+            rows: "1373,1174,1343,1462"
+          - name: "b11-09"
+            rows: "1471,1067,1432,998"
+          - name: "b11-10"
+            rows: "1061,1406,1479,962"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet "shapely>=2.0" "pyproj>=3.5" "requests>=2.31"
+      - name: Bounded read-only OSM path geometry
+        run: python scripts/osm_small_bbox_check.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: Official regional walking geometry overlay
+        run: python scripts/oac_tracks_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - name: DOC published walking-experience geometry overlay
+        run: python scripts/doc_open_track_match.py --rows "${{ matrix.rows }}" --name "${{ matrix.name }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "access-b11-${{ matrix.name }}"
+          path: |
+            local_osm_*.json
+            oac_match_*.json
+            doc_match_*.json
+          if-no-files-found: warn
